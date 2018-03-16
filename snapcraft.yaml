@@ -1,5 +1,5 @@
 name: bluez
-version: 5.47-4-dev
+version: 5.49-1-dev
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -84,7 +84,7 @@ parts:
     plugin: autotools
     source: https://git.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
     source-type: git
-    source-branch: bluez/5.47
+    source-branch: bluez/5.49
     configflags:
       - --prefix=/usr
       - --libexec=/usr/lib/
