@@ -45,6 +45,10 @@ apps:
     command: usr/bin/hciattach
     plugs: [bluetooth-control]
     aliases: [hciattach]
+  btattach:
+    command: usr/bin/btattach
+    plugs: [bluetooth-control]
+    aliases: [btattach]
   hcitool:
     command: usr/bin/hcitool
     plugs: [bluetooth-control]
@@ -119,6 +123,7 @@ parts:
       - usr/bin/hciconfig
       - usr/bin/hcidump
       - usr/bin/hciattach
+      - usr/bin/btattach
       - usr/bin/hcitool
       - usr/bin/sdptool
       - usr/bin/btmon
