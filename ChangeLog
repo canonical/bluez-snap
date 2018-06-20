@@ -1,3 +1,14 @@
+2018-06-20 bluez 5.47-1
+
+  [ Konrad Zapałowicz <konrad.zapalowicz@canonical.com> ]
+  * docs: update bluez-tests section
+    Merge-Proposal: https://code.launchpad.net/~kzapalowicz/snappy-hwe-snaps/+git/bluez/+merge/331041
+  * snap: new upstream version 5.47
+    
+    * bump bluez to 5.47
+    * enable meshctl tool introduced with 5.47
+    Merge-Proposal: https://code.launchpad.net/~kzapalowicz/snappy-hwe-snaps/+git/bluez/+merge/331040
+
 2017-09-13 bluez 5.44-3
 
   [ Konrad Zapałowicz <konrad.zapalowicz@canonical.com> ]
