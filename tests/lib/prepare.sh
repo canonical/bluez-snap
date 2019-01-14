@@ -20,9 +20,6 @@ for name in $gadget_name $kernel_name $core_name; do
 	fi
 done
 
-echo "Kernel has a store revision"
-snap list | grep ^${kernel_name} | grep -E " [0-9]+\s+canonical"
-
 install_snap_under_test
 
 # Snapshot of the current snapd state for a later restore
