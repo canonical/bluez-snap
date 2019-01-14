@@ -1,5 +1,5 @@
 name: bluez
-version: 5.47-4-dev
+version: 5.49-1-dev
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -11,18 +11,13 @@ description: |
 confinement: strict
 grade: stable
 
-# NOTE: the alias syntax is depreciated with snapd 2.25 however it needs to
-# stay to guarantee that all clients are updated correctly.
-
 apps:
   bluetoothctl:
     command: bin/client-wrapper usr/bin/bluetoothctl
     plugs: [client, uhid]
-    aliases: [bluetoothctl]
   obexctl:
     command: bin/client-wrapper usr/bin/obexctl
     plugs: [client]
-    aliases: [obexctl]
   bluez:
     command: "usr/lib/bluetooth/bluetoothd -E"
     daemon: simple
@@ -35,37 +30,30 @@ apps:
   hciconfig:
     command: usr/bin/hciconfig
     plugs: [bluetooth-control]
-    aliases: [hciconfig]
   hcidump:
     command: usr/bin/hcidump
     plugs: [bluetooth-control, network-control, home]
-    aliases:
-      - hcidump
   hciattach:
     command: usr/bin/hciattach
     plugs: [bluetooth-control]
-    aliases: [hciattach]
+  btattach:
+    command: usr/bin/btattach
+    plugs: [bluetooth-control]
   hcitool:
     command: usr/bin/hcitool
     plugs: [bluetooth-control]
-    aliases: [hcitool]
   sdptool:
     command: usr/bin/sdptool
     plugs: [client]
-    aliases: [sdptool]
   btmon:
     command: usr/bin/btmon
     plugs: [bluetooth-control, network-control, home]
-    aliases: [btmon]
-
   btmgmt:
     command: usr/bin/btmgmt
     plugs: [bluetooth-control, network-control]
-    aliases: [btmgmt]
   meshctl:
     command: usr/bin/meshctl
     plugs: [bluetooth-control, network-control]
-    aliases: [meshctl]
 
 plugs:
   client:
@@ -84,7 +72,7 @@ parts:
     plugin: autotools
     source: https://git.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
     source-type: git
-    source-branch: bluez/5.47
+    source-branch: bluez/5.49
     configflags:
       - --prefix=/usr
       - --libexec=/usr/lib/
@@ -119,6 +107,7 @@ parts:
       - usr/bin/hciconfig
       - usr/bin/hcidump
       - usr/bin/hciattach
+      - usr/bin/btattach
       - usr/bin/hcitool
       - usr/bin/sdptool
       - usr/bin/btmon
