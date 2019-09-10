@@ -10,6 +10,7 @@ description: |
  https://code.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
 confinement: strict
 grade: stable
+base: core
 
 apps:
   bluetoothctl:
@@ -121,7 +122,8 @@ parts:
       - usr/bin/meshctl
       - usr/share/doc/libical1a/copyright
       - $libical1a
-    install: |
+    override-build: |
+      snapcraftctl build
       # Run all tests shiped by default
       make check
 
