@@ -10,6 +10,7 @@ description: |
  https://code.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
 confinement: strict
 grade: stable
+base: core
 
 apps:
   bluetoothctl:
@@ -68,6 +69,14 @@ parts:
     source: bin/
     organize:
       client-wrapper: bin/client-wrapper
+  changelog:
+    plugin: nil
+    override-build: |
+      cp "$SNAPCRAFT_PROJECT_DIR"/copyright "$SNAPCRAFT_PART_INSTALL"
+      cp "$SNAPCRAFT_PROJECT_DIR"/ChangeLog "$SNAPCRAFT_PART_INSTALL"
+    organize:
+      copyright: usr/share/doc/bluez/copyright
+      ChangeLog: usr/share/doc/bluez/ChangeLog
   bluez:
     plugin: autotools
     source: https://git.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
@@ -99,7 +108,7 @@ parts:
     filesets:
       libical1a:
         - usr/lib/*/libical*
-    snap:
+    prime:
       - usr/lib/bluetooth/bluetoothd
       - usr/lib/bluetooth/obexd
       - usr/bin/bluetoothctl
@@ -115,13 +124,7 @@ parts:
       - usr/bin/meshctl
       - usr/share/doc/libical1a/copyright
       - $libical1a
-    install: |
+    override-build: |
+      snapcraftctl build
       # Run all tests shiped by default
       make check
-
-  common:
-    plugin: dump
-    organize:
-      copyright: usr/share/doc/bluez/copyright
-    prime:
-      - usr/share/doc/bluez/copyright
