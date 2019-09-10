@@ -68,6 +68,12 @@ parts:
     source: bin/
     organize:
       client-wrapper: bin/client-wrapper
+  changelog:
+    plugin: nil
+    override-build: |
+      cp "$SNAPCRAFT_PROJECT_DIR"/ChangeLog "$SNAPCRAFT_PART_INSTALL"
+    organize:
+      ChangeLog: usr/share/doc/bluez/ChangeLog
   bluez:
     plugin: autotools
     source: https://git.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
