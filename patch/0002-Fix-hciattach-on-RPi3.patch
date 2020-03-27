@@ -1,0 +1,54 @@
+From b18b2efc433309f80e72e40d2b31c67e47d6d277 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Konrad=20Zapa=C5=82owicz?= <konrad.zapalowicz@canonical.com>
+Date: Tue, 4 Apr 2017 16:22:33 +0200
+Subject: [PATCH 2/2] Fix hciattach on RPi3
+
+This patch fixes the hciattach on Raspberry Pi 3 by applying the
+following changes:
+
+* don't set UART speed before loading firmware (thanks to
+  https://github.com/MilhouseVH)
+* change FIRMWARE_DIR to /lib/formware
+
+These changes originated from LP: #1674509
+---
+ tools/hciattach_bcm43xx.c | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/tools/hciattach_bcm43xx.c b/tools/hciattach_bcm43xx.c
+index be82cd0..c1a005d 100644
+--- a/tools/hciattach_bcm43xx.c
++++ b/tools/hciattach_bcm43xx.c
+@@ -44,7 +44,7 @@
+ #include "hciattach.h"
+ 
+ #ifndef FIRMWARE_DIR
+-#define FIRMWARE_DIR "/etc/firmware"
++#define FIRMWARE_DIR "/lib/firmware"
+ #endif
+ 
+ #define FW_EXT ".hcd"
+@@ -369,9 +369,6 @@ int bcm43xx_init(int fd, int def_speed, int speed, struct termios *ti,
+ 	if (bcm43xx_locate_patch(FIRMWARE_DIR, chip_name, fw_path)) {
+ 		fprintf(stderr, "Patch not found, continue anyway\n");
+ 	} else {
+-		if (bcm43xx_set_speed(fd, ti, speed))
+-			return -1;
+-
+ 		if (bcm43xx_load_firmware(fd, fw_path))
+ 			return -1;
+ 
+@@ -380,6 +377,10 @@ int bcm43xx_init(int fd, int def_speed, int speed, struct termios *ti,
+ 			perror("Can't set host baud rate");
+ 			return -1;
+ 		}
++		/* give a moment to the controller to acknowledge the above
++		 * commands. without waiting it did fail on reset sometimes
++		 */
++		sleep(1);
+ 
+ 		if (bcm43xx_reset(fd))
+ 			return -1;
+-- 
+2.17.1
+
