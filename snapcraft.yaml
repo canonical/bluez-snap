@@ -1,5 +1,5 @@
 name: bluez
-version: 5.49-1-dev
+version: 5.53-1-dev
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -10,7 +10,7 @@ description: |
  https://code.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
 confinement: strict
 grade: stable
-base: core
+base: core20
 
 apps:
   bluetoothctl:
@@ -79,9 +79,9 @@ parts:
       ChangeLog: usr/share/doc/bluez/ChangeLog
   bluez:
     plugin: autotools
-    source: https://git.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
+    source: https://git.launchpad.net/ubuntu/+source/bluez
     source-type: git
-    source-branch: bluez/5.49
+    source-branch: applied/5.53-0ubuntu2
     configflags:
       - --prefix=/usr
       - --libexec=/usr/lib/
@@ -95,18 +95,20 @@ parts:
       - --enable-deprecated
       - --enable-mesh
     build-packages:
+      - flex
+      - bison
+      - libdbus-glib-1-dev
       - libglib2.0-dev
-      - libdbus-1-dev
-      - libical-dev
-      - libreadline6-dev
-      - libudev-dev
+      - libcap-ng-dev
       - udev
-      - pkg-config
-      - libjson-c-dev
+      - libudev-dev
+      - libreadline-dev
+      - libical-dev
+      - check
     stage-packages:
-      - libical1a
+      - libical3
     filesets:
-      libical1a:
+      libical3:
         - usr/lib/*/libical*
     prime:
       - usr/lib/bluetooth/bluetoothd
@@ -122,9 +124,11 @@ parts:
       - usr/bin/btmon
       - usr/bin/btmgmt
       - usr/bin/meshctl
-      - usr/share/doc/libical1a/copyright
-      - $libical1a
+      - usr/share/doc/libical3/copyright
+      - $libical3
     override-build: |
       snapcraftctl build
+      cp tools/btmgmt "$SNAPCRAFT_PART_INSTALL"/usr/bin/
+      cp tools/obexctl "$SNAPCRAFT_PART_INSTALL"/usr/bin/
       # Run all tests shiped by default
       make check
