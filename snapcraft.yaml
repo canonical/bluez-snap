@@ -111,18 +111,6 @@ parts:
       - libreadline-dev
       - libical-dev
       - check
-    stage-packages:
-      - libical3
-      - libicu66
-    filesets:
-      libical3:
-        - usr/lib/*/libical*
-        - usr/share/doc/libical3/copyright
-      libicu66:
-        - usr/lib/*/libicudata*
-        - usr/lib/*/libicui18n*
-        - usr/lib/*/libicuuc*
-        - usr/share/doc/libicu66/copyright
     prime:
       - usr/lib/bluetooth/bluetoothd
       - usr/lib/bluetooth/obexd
@@ -137,8 +125,6 @@ parts:
       - usr/bin/btmon
       - usr/bin/btmgmt
       - usr/bin/meshctl
-      - $libical3
-      - $libicu66
     override-build: |
       git config user.email "snapcraft@canonical.com"
       git config user.name "snapcraft"

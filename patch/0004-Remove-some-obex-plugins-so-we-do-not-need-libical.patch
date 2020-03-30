@@ -1,0 +1,391 @@
+From cde0bec4000d561edbeab8317d6d815b84125aa5 Mon Sep 17 00:00:00 2001
+From: Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com>
+Date: Mon, 30 Mar 2020 12:28:47 +0200
+Subject: [PATCH] Remove some obex plugins so we do not need libical
+
+Remove some obex plugins so we do not need libical. This library
+was in turn pulling libicu, which is a 12MB dependency. The use case
+for obex pbap/irmc in IoT is not strong, so better to remove it from
+the snap.
+---
+ Makefile.in            | 125 ++---------------------------------------
+ Makefile.obexd         |  14 +----
+ configure.ac           |   6 --
+ obexd/client/manager.c |   2 -
+ 4 files changed, 7 insertions(+), 140 deletions(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index 35fd6fd..64313bf 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -966,9 +966,6 @@ am__obexd_src_obexd_SOURCES_DIST = btio/btio.h btio/btio.c \
+ 	obexd/plugins/filesystem.c obexd/plugins/filesystem.h \
+ 	obexd/plugins/bluetooth.c obexd/plugins/pcsuite.c \
+ 	obexd/plugins/opp.c obexd/plugins/ftp.c obexd/plugins/ftp.h \
+-	obexd/plugins/irmc.c obexd/plugins/pbap.c \
+-	obexd/plugins/vcard.h obexd/plugins/vcard.c \
+-	obexd/plugins/phonebook.h obexd/plugins/phonebook-dummy.c \
+ 	obexd/plugins/mas.c obexd/src/map_ap.h \
+ 	obexd/plugins/messages.h obexd/plugins/messages-dummy.c \
+ 	obexd/client/mns.c obexd/client/map-event.h obexd/src/main.c \
+@@ -982,7 +979,7 @@ am__obexd_src_obexd_SOURCES_DIST = btio/btio.h btio/btio.c \
+ 	obexd/client/manager.c obexd/client/session.h \
+ 	obexd/client/session.c obexd/client/bluetooth.h \
+ 	obexd/client/bluetooth.c obexd/client/sync.h \
+-	obexd/client/sync.c obexd/client/pbap.h obexd/client/pbap.c \
++	obexd/client/sync.c \
+ 	obexd/client/ftp.h obexd/client/ftp.c obexd/client/opp.h \
+ 	obexd/client/opp.c obexd/client/map.h obexd/client/map.c \
+ 	obexd/client/map-event.c obexd/client/transfer.h \
+@@ -1001,10 +998,6 @@ am__objects_9 = gobex/obexd-gobex.$(OBJEXT) \
+ @OBEX_TRUE@	obexd/plugins/obexd-bluetooth.$(OBJEXT) \
+ @OBEX_TRUE@	$(am__objects_10) obexd/plugins/obexd-opp.$(OBJEXT) \
+ @OBEX_TRUE@	obexd/plugins/obexd-ftp.$(OBJEXT) \
+-@OBEX_TRUE@	obexd/plugins/obexd-irmc.$(OBJEXT) \
+-@OBEX_TRUE@	obexd/plugins/obexd-pbap.$(OBJEXT) \
+-@OBEX_TRUE@	obexd/plugins/obexd-vcard.$(OBJEXT) \
+-@OBEX_TRUE@	obexd/plugins/obexd-phonebook-dummy.$(OBJEXT) \
+ @OBEX_TRUE@	obexd/plugins/obexd-mas.$(OBJEXT) \
+ @OBEX_TRUE@	obexd/plugins/obexd-messages-dummy.$(OBJEXT) \
+ @OBEX_TRUE@	obexd/client/obexd-mns.$(OBJEXT)
+@@ -1023,7 +1016,6 @@ am__objects_9 = gobex/obexd-gobex.$(OBJEXT) \
+ @OBEX_TRUE@	obexd/client/obexd-session.$(OBJEXT) \
+ @OBEX_TRUE@	obexd/client/obexd-bluetooth.$(OBJEXT) \
+ @OBEX_TRUE@	obexd/client/obexd-sync.$(OBJEXT) \
+-@OBEX_TRUE@	obexd/client/obexd-pbap.$(OBJEXT) \
+ @OBEX_TRUE@	obexd/client/obexd-ftp.$(OBJEXT) \
+ @OBEX_TRUE@	obexd/client/obexd-opp.$(OBJEXT) \
+ @OBEX_TRUE@	obexd/client/obexd-map.$(OBJEXT) \
+@@ -2044,7 +2036,6 @@ am__depfiles_remade = android/$(DEPDIR)/a2dp-sink.Po \
+ 	obexd/client/$(DEPDIR)/obexd-map.Po \
+ 	obexd/client/$(DEPDIR)/obexd-mns.Po \
+ 	obexd/client/$(DEPDIR)/obexd-opp.Po \
+-	obexd/client/$(DEPDIR)/obexd-pbap.Po \
+ 	obexd/client/$(DEPDIR)/obexd-session.Po \
+ 	obexd/client/$(DEPDIR)/obexd-sync.Po \
+ 	obexd/client/$(DEPDIR)/obexd-transfer.Po \
+@@ -2052,14 +2043,10 @@ am__depfiles_remade = android/$(DEPDIR)/a2dp-sink.Po \
+ 	obexd/plugins/$(DEPDIR)/obexd-bluetooth.Po \
+ 	obexd/plugins/$(DEPDIR)/obexd-filesystem.Po \
+ 	obexd/plugins/$(DEPDIR)/obexd-ftp.Po \
+-	obexd/plugins/$(DEPDIR)/obexd-irmc.Po \
+ 	obexd/plugins/$(DEPDIR)/obexd-mas.Po \
+ 	obexd/plugins/$(DEPDIR)/obexd-messages-dummy.Po \
+ 	obexd/plugins/$(DEPDIR)/obexd-opp.Po \
+-	obexd/plugins/$(DEPDIR)/obexd-pbap.Po \
+ 	obexd/plugins/$(DEPDIR)/obexd-pcsuite.Po \
+-	obexd/plugins/$(DEPDIR)/obexd-phonebook-dummy.Po \
+-	obexd/plugins/$(DEPDIR)/obexd-vcard.Po \
+ 	obexd/src/$(DEPDIR)/obexd-log.Po \
+ 	obexd/src/$(DEPDIR)/obexd-main.Po \
+ 	obexd/src/$(DEPDIR)/obexd-manager.Po \
+@@ -2750,8 +2737,6 @@ GLIB_LIBS = @GLIB_LIBS@
+ GREP = @GREP@
+ GTHREAD_CFLAGS = @GTHREAD_CFLAGS@
+ GTHREAD_LIBS = @GTHREAD_LIBS@
+-ICAL_CFLAGS = @ICAL_CFLAGS@
+-ICAL_LIBS = @ICAL_LIBS@
+ INSTALL = @INSTALL@
+ INSTALL_DATA = @INSTALL_DATA@
+ INSTALL_PROGRAM = @INSTALL_PROGRAM@
+@@ -3568,15 +3553,12 @@ unit_tests = $(am__append_54) unit/test-eir unit/test-uuid \
+ @SYSTEMD_TRUE@dbussessionbus_DATA = obexd/src/org.bluez.obex.service
+ @OBEX_TRUE@obex_plugindir = $(libdir)/obex/plugins
+ @OBEX_TRUE@obexd_builtin_modules = filesystem bluetooth \
+-@OBEX_TRUE@	$(am__append_48) opp ftp irmc pbap mas mns
++@OBEX_TRUE@	$(am__append_48) opp ftp mas mns
+ @OBEX_TRUE@obexd_builtin_sources = obexd/plugins/filesystem.c \
+ @OBEX_TRUE@	obexd/plugins/filesystem.h \
+ @OBEX_TRUE@	obexd/plugins/bluetooth.c $(am__append_49) \
+ @OBEX_TRUE@	obexd/plugins/opp.c obexd/plugins/ftp.c \
+-@OBEX_TRUE@	obexd/plugins/ftp.h obexd/plugins/irmc.c \
+-@OBEX_TRUE@	obexd/plugins/pbap.c obexd/plugins/vcard.h \
+-@OBEX_TRUE@	obexd/plugins/vcard.c obexd/plugins/phonebook.h \
+-@OBEX_TRUE@	obexd/plugins/phonebook-dummy.c obexd/plugins/mas.c \
++@OBEX_TRUE@	obexd/plugins/mas.c \
+ @OBEX_TRUE@	obexd/src/map_ap.h obexd/plugins/messages.h \
+ @OBEX_TRUE@	obexd/plugins/messages-dummy.c obexd/client/mns.c \
+ @OBEX_TRUE@	obexd/src/map_ap.h obexd/client/map-event.h
+@@ -3596,7 +3578,6 @@ unit_tests = $(am__append_54) unit/test-eir unit/test-uuid \
+ @OBEX_TRUE@			obexd/client/session.h obexd/client/session.c \
+ @OBEX_TRUE@			obexd/client/bluetooth.h obexd/client/bluetooth.c \
+ @OBEX_TRUE@			obexd/client/sync.h obexd/client/sync.c \
+-@OBEX_TRUE@			obexd/client/pbap.h obexd/client/pbap.c \
+ @OBEX_TRUE@			obexd/client/ftp.h obexd/client/ftp.c \
+ @OBEX_TRUE@			obexd/client/opp.h obexd/client/opp.c \
+ @OBEX_TRUE@			obexd/client/map.h obexd/client/map.c \
+@@ -3608,11 +3589,11 @@ unit_tests = $(am__append_54) unit/test-eir unit/test-uuid \
+ 
+ @OBEX_TRUE@obexd_src_obexd_LDADD = lib/libbluetooth-internal.la \
+ @OBEX_TRUE@			gdbus/libgdbus-internal.la \
+-@OBEX_TRUE@			$(ICAL_LIBS) $(DBUS_LIBS) $(GLIB_LIBS) -ldl
++@OBEX_TRUE@			$(DBUS_LIBS) $(GLIB_LIBS) -ldl
+ 
+ @OBEX_TRUE@obexd_src_obexd_LDFLAGS = $(AM_LDFLAGS) -Wl,--export-dynamic
+ @OBEX_TRUE@obexd_src_obexd_CPPFLAGS = $(AM_CPPFLAGS) $(GLIB_CFLAGS) $(DBUS_CFLAGS) \
+-@OBEX_TRUE@				$(ICAL_CFLAGS) -DOBEX_PLUGIN_BUILTIN \
++@OBEX_TRUE@				-DOBEX_PLUGIN_BUILTIN \
+ @OBEX_TRUE@				-DPLUGINDIR=\""$(obex_plugindir)"\" \
+ @OBEX_TRUE@				-D_FILE_OFFSET_BITS=64 \
+ @OBEX_TRUE@				-I$(builddir)/lib -I$(builddir)/obexd/src
+@@ -5105,15 +5086,6 @@ obexd/plugins/obexd-opp.$(OBJEXT): obexd/plugins/$(am__dirstamp) \
+ 	obexd/plugins/$(DEPDIR)/$(am__dirstamp)
+ obexd/plugins/obexd-ftp.$(OBJEXT): obexd/plugins/$(am__dirstamp) \
+ 	obexd/plugins/$(DEPDIR)/$(am__dirstamp)
+-obexd/plugins/obexd-irmc.$(OBJEXT): obexd/plugins/$(am__dirstamp) \
+-	obexd/plugins/$(DEPDIR)/$(am__dirstamp)
+-obexd/plugins/obexd-pbap.$(OBJEXT): obexd/plugins/$(am__dirstamp) \
+-	obexd/plugins/$(DEPDIR)/$(am__dirstamp)
+-obexd/plugins/obexd-vcard.$(OBJEXT): obexd/plugins/$(am__dirstamp) \
+-	obexd/plugins/$(DEPDIR)/$(am__dirstamp)
+-obexd/plugins/obexd-phonebook-dummy.$(OBJEXT):  \
+-	obexd/plugins/$(am__dirstamp) \
+-	obexd/plugins/$(DEPDIR)/$(am__dirstamp)
+ obexd/plugins/obexd-mas.$(OBJEXT): obexd/plugins/$(am__dirstamp) \
+ 	obexd/plugins/$(DEPDIR)/$(am__dirstamp)
+ obexd/plugins/obexd-messages-dummy.$(OBJEXT):  \
+@@ -5159,8 +5131,6 @@ obexd/client/obexd-bluetooth.$(OBJEXT): obexd/client/$(am__dirstamp) \
+ 	obexd/client/$(DEPDIR)/$(am__dirstamp)
+ obexd/client/obexd-sync.$(OBJEXT): obexd/client/$(am__dirstamp) \
+ 	obexd/client/$(DEPDIR)/$(am__dirstamp)
+-obexd/client/obexd-pbap.$(OBJEXT): obexd/client/$(am__dirstamp) \
+-	obexd/client/$(DEPDIR)/$(am__dirstamp)
+ obexd/client/obexd-ftp.$(OBJEXT): obexd/client/$(am__dirstamp) \
+ 	obexd/client/$(DEPDIR)/$(am__dirstamp)
+ obexd/client/obexd-opp.$(OBJEXT): obexd/client/$(am__dirstamp) \
+@@ -6472,7 +6442,6 @@ distclean-compile:
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/client/$(DEPDIR)/obexd-map.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/client/$(DEPDIR)/obexd-mns.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/client/$(DEPDIR)/obexd-opp.Po@am__quote@ # am--include-marker
+-@AMDEP_TRUE@@am__include@ @am__quote@obexd/client/$(DEPDIR)/obexd-pbap.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/client/$(DEPDIR)/obexd-session.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/client/$(DEPDIR)/obexd-sync.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/client/$(DEPDIR)/obexd-transfer.Po@am__quote@ # am--include-marker
+@@ -6480,14 +6449,10 @@ distclean-compile:
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/plugins/$(DEPDIR)/obexd-bluetooth.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/plugins/$(DEPDIR)/obexd-filesystem.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/plugins/$(DEPDIR)/obexd-ftp.Po@am__quote@ # am--include-marker
+-@AMDEP_TRUE@@am__include@ @am__quote@obexd/plugins/$(DEPDIR)/obexd-irmc.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/plugins/$(DEPDIR)/obexd-mas.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/plugins/$(DEPDIR)/obexd-messages-dummy.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/plugins/$(DEPDIR)/obexd-opp.Po@am__quote@ # am--include-marker
+-@AMDEP_TRUE@@am__include@ @am__quote@obexd/plugins/$(DEPDIR)/obexd-pbap.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/plugins/$(DEPDIR)/obexd-pcsuite.Po@am__quote@ # am--include-marker
+-@AMDEP_TRUE@@am__include@ @am__quote@obexd/plugins/$(DEPDIR)/obexd-phonebook-dummy.Po@am__quote@ # am--include-marker
+-@AMDEP_TRUE@@am__include@ @am__quote@obexd/plugins/$(DEPDIR)/obexd-vcard.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/src/$(DEPDIR)/obexd-log.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/src/$(DEPDIR)/obexd-main.Po@am__quote@ # am--include-marker
+ @AMDEP_TRUE@@am__include@ @am__quote@obexd/src/$(DEPDIR)/obexd-manager.Po@am__quote@ # am--include-marker
+@@ -7834,62 +7799,6 @@ obexd/plugins/obexd-ftp.obj: obexd/plugins/ftp.c
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -c -o obexd/plugins/obexd-ftp.obj `if test -f 'obexd/plugins/ftp.c'; then $(CYGPATH_W) 'obexd/plugins/ftp.c'; else $(CYGPATH_W) '$(srcdir)/obexd/plugins/ftp.c'; fi`
+ 
+-obexd/plugins/obexd-irmc.o: obexd/plugins/irmc.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -MT obexd/plugins/obexd-irmc.o -MD -MP -MF obexd/plugins/$(DEPDIR)/obexd-irmc.Tpo -c -o obexd/plugins/obexd-irmc.o `test -f 'obexd/plugins/irmc.c' || echo '$(srcdir)/'`obexd/plugins/irmc.c
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) obexd/plugins/$(DEPDIR)/obexd-irmc.Tpo obexd/plugins/$(DEPDIR)/obexd-irmc.Po
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='obexd/plugins/irmc.c' object='obexd/plugins/obexd-irmc.o' libtool=no @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -c -o obexd/plugins/obexd-irmc.o `test -f 'obexd/plugins/irmc.c' || echo '$(srcdir)/'`obexd/plugins/irmc.c
+-
+-obexd/plugins/obexd-irmc.obj: obexd/plugins/irmc.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -MT obexd/plugins/obexd-irmc.obj -MD -MP -MF obexd/plugins/$(DEPDIR)/obexd-irmc.Tpo -c -o obexd/plugins/obexd-irmc.obj `if test -f 'obexd/plugins/irmc.c'; then $(CYGPATH_W) 'obexd/plugins/irmc.c'; else $(CYGPATH_W) '$(srcdir)/obexd/plugins/irmc.c'; fi`
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) obexd/plugins/$(DEPDIR)/obexd-irmc.Tpo obexd/plugins/$(DEPDIR)/obexd-irmc.Po
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='obexd/plugins/irmc.c' object='obexd/plugins/obexd-irmc.obj' libtool=no @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -c -o obexd/plugins/obexd-irmc.obj `if test -f 'obexd/plugins/irmc.c'; then $(CYGPATH_W) 'obexd/plugins/irmc.c'; else $(CYGPATH_W) '$(srcdir)/obexd/plugins/irmc.c'; fi`
+-
+-obexd/plugins/obexd-pbap.o: obexd/plugins/pbap.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -MT obexd/plugins/obexd-pbap.o -MD -MP -MF obexd/plugins/$(DEPDIR)/obexd-pbap.Tpo -c -o obexd/plugins/obexd-pbap.o `test -f 'obexd/plugins/pbap.c' || echo '$(srcdir)/'`obexd/plugins/pbap.c
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) obexd/plugins/$(DEPDIR)/obexd-pbap.Tpo obexd/plugins/$(DEPDIR)/obexd-pbap.Po
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='obexd/plugins/pbap.c' object='obexd/plugins/obexd-pbap.o' libtool=no @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -c -o obexd/plugins/obexd-pbap.o `test -f 'obexd/plugins/pbap.c' || echo '$(srcdir)/'`obexd/plugins/pbap.c
+-
+-obexd/plugins/obexd-pbap.obj: obexd/plugins/pbap.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -MT obexd/plugins/obexd-pbap.obj -MD -MP -MF obexd/plugins/$(DEPDIR)/obexd-pbap.Tpo -c -o obexd/plugins/obexd-pbap.obj `if test -f 'obexd/plugins/pbap.c'; then $(CYGPATH_W) 'obexd/plugins/pbap.c'; else $(CYGPATH_W) '$(srcdir)/obexd/plugins/pbap.c'; fi`
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) obexd/plugins/$(DEPDIR)/obexd-pbap.Tpo obexd/plugins/$(DEPDIR)/obexd-pbap.Po
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='obexd/plugins/pbap.c' object='obexd/plugins/obexd-pbap.obj' libtool=no @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -c -o obexd/plugins/obexd-pbap.obj `if test -f 'obexd/plugins/pbap.c'; then $(CYGPATH_W) 'obexd/plugins/pbap.c'; else $(CYGPATH_W) '$(srcdir)/obexd/plugins/pbap.c'; fi`
+-
+-obexd/plugins/obexd-vcard.o: obexd/plugins/vcard.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -MT obexd/plugins/obexd-vcard.o -MD -MP -MF obexd/plugins/$(DEPDIR)/obexd-vcard.Tpo -c -o obexd/plugins/obexd-vcard.o `test -f 'obexd/plugins/vcard.c' || echo '$(srcdir)/'`obexd/plugins/vcard.c
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) obexd/plugins/$(DEPDIR)/obexd-vcard.Tpo obexd/plugins/$(DEPDIR)/obexd-vcard.Po
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='obexd/plugins/vcard.c' object='obexd/plugins/obexd-vcard.o' libtool=no @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -c -o obexd/plugins/obexd-vcard.o `test -f 'obexd/plugins/vcard.c' || echo '$(srcdir)/'`obexd/plugins/vcard.c
+-
+-obexd/plugins/obexd-vcard.obj: obexd/plugins/vcard.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -MT obexd/plugins/obexd-vcard.obj -MD -MP -MF obexd/plugins/$(DEPDIR)/obexd-vcard.Tpo -c -o obexd/plugins/obexd-vcard.obj `if test -f 'obexd/plugins/vcard.c'; then $(CYGPATH_W) 'obexd/plugins/vcard.c'; else $(CYGPATH_W) '$(srcdir)/obexd/plugins/vcard.c'; fi`
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) obexd/plugins/$(DEPDIR)/obexd-vcard.Tpo obexd/plugins/$(DEPDIR)/obexd-vcard.Po
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='obexd/plugins/vcard.c' object='obexd/plugins/obexd-vcard.obj' libtool=no @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -c -o obexd/plugins/obexd-vcard.obj `if test -f 'obexd/plugins/vcard.c'; then $(CYGPATH_W) 'obexd/plugins/vcard.c'; else $(CYGPATH_W) '$(srcdir)/obexd/plugins/vcard.c'; fi`
+-
+-obexd/plugins/obexd-phonebook-dummy.o: obexd/plugins/phonebook-dummy.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -MT obexd/plugins/obexd-phonebook-dummy.o -MD -MP -MF obexd/plugins/$(DEPDIR)/obexd-phonebook-dummy.Tpo -c -o obexd/plugins/obexd-phonebook-dummy.o `test -f 'obexd/plugins/phonebook-dummy.c' || echo '$(srcdir)/'`obexd/plugins/phonebook-dummy.c
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) obexd/plugins/$(DEPDIR)/obexd-phonebook-dummy.Tpo obexd/plugins/$(DEPDIR)/obexd-phonebook-dummy.Po
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='obexd/plugins/phonebook-dummy.c' object='obexd/plugins/obexd-phonebook-dummy.o' libtool=no @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -c -o obexd/plugins/obexd-phonebook-dummy.o `test -f 'obexd/plugins/phonebook-dummy.c' || echo '$(srcdir)/'`obexd/plugins/phonebook-dummy.c
+-
+-obexd/plugins/obexd-phonebook-dummy.obj: obexd/plugins/phonebook-dummy.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -MT obexd/plugins/obexd-phonebook-dummy.obj -MD -MP -MF obexd/plugins/$(DEPDIR)/obexd-phonebook-dummy.Tpo -c -o obexd/plugins/obexd-phonebook-dummy.obj `if test -f 'obexd/plugins/phonebook-dummy.c'; then $(CYGPATH_W) 'obexd/plugins/phonebook-dummy.c'; else $(CYGPATH_W) '$(srcdir)/obexd/plugins/phonebook-dummy.c'; fi`
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) obexd/plugins/$(DEPDIR)/obexd-phonebook-dummy.Tpo obexd/plugins/$(DEPDIR)/obexd-phonebook-dummy.Po
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='obexd/plugins/phonebook-dummy.c' object='obexd/plugins/obexd-phonebook-dummy.obj' libtool=no @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -c -o obexd/plugins/obexd-phonebook-dummy.obj `if test -f 'obexd/plugins/phonebook-dummy.c'; then $(CYGPATH_W) 'obexd/plugins/phonebook-dummy.c'; else $(CYGPATH_W) '$(srcdir)/obexd/plugins/phonebook-dummy.c'; fi`
+-
+ obexd/plugins/obexd-mas.o: obexd/plugins/mas.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -MT obexd/plugins/obexd-mas.o -MD -MP -MF obexd/plugins/$(DEPDIR)/obexd-mas.Tpo -c -o obexd/plugins/obexd-mas.o `test -f 'obexd/plugins/mas.c' || echo '$(srcdir)/'`obexd/plugins/mas.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) obexd/plugins/$(DEPDIR)/obexd-mas.Tpo obexd/plugins/$(DEPDIR)/obexd-mas.Po
+@@ -8114,20 +8023,6 @@ obexd/client/obexd-sync.obj: obexd/client/sync.c
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -c -o obexd/client/obexd-sync.obj `if test -f 'obexd/client/sync.c'; then $(CYGPATH_W) 'obexd/client/sync.c'; else $(CYGPATH_W) '$(srcdir)/obexd/client/sync.c'; fi`
+ 
+-obexd/client/obexd-pbap.o: obexd/client/pbap.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -MT obexd/client/obexd-pbap.o -MD -MP -MF obexd/client/$(DEPDIR)/obexd-pbap.Tpo -c -o obexd/client/obexd-pbap.o `test -f 'obexd/client/pbap.c' || echo '$(srcdir)/'`obexd/client/pbap.c
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) obexd/client/$(DEPDIR)/obexd-pbap.Tpo obexd/client/$(DEPDIR)/obexd-pbap.Po
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='obexd/client/pbap.c' object='obexd/client/obexd-pbap.o' libtool=no @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -c -o obexd/client/obexd-pbap.o `test -f 'obexd/client/pbap.c' || echo '$(srcdir)/'`obexd/client/pbap.c
+-
+-obexd/client/obexd-pbap.obj: obexd/client/pbap.c
+-@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -MT obexd/client/obexd-pbap.obj -MD -MP -MF obexd/client/$(DEPDIR)/obexd-pbap.Tpo -c -o obexd/client/obexd-pbap.obj `if test -f 'obexd/client/pbap.c'; then $(CYGPATH_W) 'obexd/client/pbap.c'; else $(CYGPATH_W) '$(srcdir)/obexd/client/pbap.c'; fi`
+-@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) obexd/client/$(DEPDIR)/obexd-pbap.Tpo obexd/client/$(DEPDIR)/obexd-pbap.Po
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='obexd/client/pbap.c' object='obexd/client/obexd-pbap.obj' libtool=no @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -c -o obexd/client/obexd-pbap.obj `if test -f 'obexd/client/pbap.c'; then $(CYGPATH_W) 'obexd/client/pbap.c'; else $(CYGPATH_W) '$(srcdir)/obexd/client/pbap.c'; fi`
+-
+ obexd/client/obexd-ftp.o: obexd/client/ftp.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(obexd_src_obexd_CPPFLAGS) $(CPPFLAGS) $(obexd_src_obexd_CFLAGS) $(CFLAGS) -MT obexd/client/obexd-ftp.o -MD -MP -MF obexd/client/$(DEPDIR)/obexd-ftp.Tpo -c -o obexd/client/obexd-ftp.o `test -f 'obexd/client/ftp.c' || echo '$(srcdir)/'`obexd/client/ftp.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) obexd/client/$(DEPDIR)/obexd-ftp.Tpo obexd/client/$(DEPDIR)/obexd-ftp.Po
+@@ -10584,7 +10479,6 @@ distclean: distclean-am
+ 	-rm -f obexd/client/$(DEPDIR)/obexd-map.Po
+ 	-rm -f obexd/client/$(DEPDIR)/obexd-mns.Po
+ 	-rm -f obexd/client/$(DEPDIR)/obexd-opp.Po
+-	-rm -f obexd/client/$(DEPDIR)/obexd-pbap.Po
+ 	-rm -f obexd/client/$(DEPDIR)/obexd-session.Po
+ 	-rm -f obexd/client/$(DEPDIR)/obexd-sync.Po
+ 	-rm -f obexd/client/$(DEPDIR)/obexd-transfer.Po
+@@ -10592,14 +10486,10 @@ distclean: distclean-am
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-bluetooth.Po
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-filesystem.Po
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-ftp.Po
+-	-rm -f obexd/plugins/$(DEPDIR)/obexd-irmc.Po
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-mas.Po
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-messages-dummy.Po
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-opp.Po
+-	-rm -f obexd/plugins/$(DEPDIR)/obexd-pbap.Po
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-pcsuite.Po
+-	-rm -f obexd/plugins/$(DEPDIR)/obexd-phonebook-dummy.Po
+-	-rm -f obexd/plugins/$(DEPDIR)/obexd-vcard.Po
+ 	-rm -f obexd/src/$(DEPDIR)/obexd-log.Po
+ 	-rm -f obexd/src/$(DEPDIR)/obexd-main.Po
+ 	-rm -f obexd/src/$(DEPDIR)/obexd-manager.Po
+@@ -11170,7 +11060,6 @@ maintainer-clean: maintainer-clean-am
+ 	-rm -f obexd/client/$(DEPDIR)/obexd-map.Po
+ 	-rm -f obexd/client/$(DEPDIR)/obexd-mns.Po
+ 	-rm -f obexd/client/$(DEPDIR)/obexd-opp.Po
+-	-rm -f obexd/client/$(DEPDIR)/obexd-pbap.Po
+ 	-rm -f obexd/client/$(DEPDIR)/obexd-session.Po
+ 	-rm -f obexd/client/$(DEPDIR)/obexd-sync.Po
+ 	-rm -f obexd/client/$(DEPDIR)/obexd-transfer.Po
+@@ -11178,14 +11067,10 @@ maintainer-clean: maintainer-clean-am
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-bluetooth.Po
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-filesystem.Po
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-ftp.Po
+-	-rm -f obexd/plugins/$(DEPDIR)/obexd-irmc.Po
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-mas.Po
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-messages-dummy.Po
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-opp.Po
+-	-rm -f obexd/plugins/$(DEPDIR)/obexd-pbap.Po
+ 	-rm -f obexd/plugins/$(DEPDIR)/obexd-pcsuite.Po
+-	-rm -f obexd/plugins/$(DEPDIR)/obexd-phonebook-dummy.Po
+-	-rm -f obexd/plugins/$(DEPDIR)/obexd-vcard.Po
+ 	-rm -f obexd/src/$(DEPDIR)/obexd-log.Po
+ 	-rm -f obexd/src/$(DEPDIR)/obexd-main.Po
+ 	-rm -f obexd/src/$(DEPDIR)/obexd-manager.Po
+diff --git a/Makefile.obexd b/Makefile.obexd
+index 73004a3..7119ac9 100644
+--- a/Makefile.obexd
++++ b/Makefile.obexd
+@@ -33,15 +33,6 @@ obexd_builtin_sources += obexd/plugins/opp.c
+ obexd_builtin_modules += ftp
+ obexd_builtin_sources += obexd/plugins/ftp.c obexd/plugins/ftp.h
+ 
+-obexd_builtin_modules += irmc
+-obexd_builtin_sources += obexd/plugins/irmc.c
+-
+-obexd_builtin_modules += pbap
+-obexd_builtin_sources += obexd/plugins/pbap.c \
+-				obexd/plugins/vcard.h obexd/plugins/vcard.c \
+-				obexd/plugins/phonebook.h \
+-				obexd/plugins/phonebook-dummy.c
+-
+ obexd_builtin_modules += mas
+ obexd_builtin_sources += obexd/plugins/mas.c obexd/src/map_ap.h \
+ 				obexd/plugins/messages.h \
+@@ -68,7 +59,6 @@ obexd_src_obexd_SOURCES = $(btio_sources) $(gobex_sources) \
+ 			obexd/client/session.h obexd/client/session.c \
+ 			obexd/client/bluetooth.h obexd/client/bluetooth.c \
+ 			obexd/client/sync.h obexd/client/sync.c \
+-			obexd/client/pbap.h obexd/client/pbap.c \
+ 			obexd/client/ftp.h obexd/client/ftp.c \
+ 			obexd/client/opp.h obexd/client/opp.c \
+ 			obexd/client/map.h obexd/client/map.c \
+@@ -79,12 +69,12 @@ obexd_src_obexd_SOURCES = $(btio_sources) $(gobex_sources) \
+ 			obexd/src/map_ap.h
+ obexd_src_obexd_LDADD = lib/libbluetooth-internal.la \
+ 			gdbus/libgdbus-internal.la \
+-			$(ICAL_LIBS) $(DBUS_LIBS) $(GLIB_LIBS) -ldl
++			$(DBUS_LIBS) $(GLIB_LIBS) -ldl
+ 
+ obexd_src_obexd_LDFLAGS = $(AM_LDFLAGS) -Wl,--export-dynamic
+ 
+ obexd_src_obexd_CPPFLAGS = $(AM_CPPFLAGS) $(GLIB_CFLAGS) $(DBUS_CFLAGS) \
+-				$(ICAL_CFLAGS) -DOBEX_PLUGIN_BUILTIN \
++				-DOBEX_PLUGIN_BUILTIN \
+ 				-DPLUGINDIR=\""$(obex_plugindir)"\" \
+ 				-D_FILE_OFFSET_BITS=64 \
+ 				-I$(builddir)/lib -I$(builddir)/obexd/src
+diff --git a/configure.ac b/configure.ac
+index b7452fa..70677ea 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -249,12 +249,6 @@ fi
+ 
+ AC_ARG_ENABLE(obex, AC_HELP_STRING([--disable-obex],
+ 		[disable OBEX profile support]), [enable_obex=${enableval}])
+-if (test "${enable_obex}" != "no"); then
+-	PKG_CHECK_MODULES(ICAL, libical, dummy=yes,
+-					AC_MSG_ERROR(libical is required))
+-	AC_SUBST(ICAL_CFLAGS)
+-	AC_SUBST(ICAL_LIBS)
+-fi
+ AM_CONDITIONAL(OBEX, test "${enable_obex}" != "no")
+ 
+ AC_ARG_ENABLE(btpclient, AC_HELP_STRING([--enable-btpclient],
+diff --git a/obexd/client/manager.c b/obexd/client/manager.c
+index fbcad6d..ad4a9ff 100644
+--- a/obexd/client/manager.c
++++ b/obexd/client/manager.c
+@@ -42,7 +42,6 @@
+ #include "bluetooth.h"
+ #include "opp.h"
+ #include "ftp.h"
+-#include "pbap.h"
+ #include "sync.h"
+ #include "map.h"
+ #include "manager.h"
+@@ -262,7 +261,6 @@ static struct obc_module {
+ 	{ "bluetooth", bluetooth_init, bluetooth_exit },
+ 	{ "opp", opp_init, opp_exit },
+ 	{ "ftp", ftp_init, ftp_exit },
+-	{ "pbap", pbap_init, pbap_exit },
+ 	{ "sync", sync_init, sync_exit },
+ 	{ "map", map_init, map_exit },
+ 	{ }
+-- 
+2.17.1
+
