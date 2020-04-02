@@ -1,3 +1,36 @@
+2020-04-02 bluez 5.47-4
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * snap: copy changelog to package
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/372528
+  * Security update to bluez/5.47 branch
+    Security update taken from Ubuntu package (https://usn.ubuntu.com/4311-1/).
+    Patches included:
+    
+    bluez (5.48-0ubuntu3.4) bionic-security; urgency=medium
+    
+      * SECURITY UPDATE: privilege escalation via improper access control
+        - debian/patches/CVE-2020-0556-1.patch: HOGP must only accept data from
+          bonded devices in profiles/input/hog.c.
+        - debian/patches/CVE-2020-0556-2.patch: HID accepts bonded device
+          connections only in profiles/input/device.c, profiles/input/device.h,
+          profiles/input/input.conf, profiles/input/manager.c.
+        - debian/patches/CVE-2020-0556-3.patch: attempt to set security level
+          if not bonded in profiles/input/hog.c.
+        - debian/patches/CVE-2020-0556-4.patch: add LEAutoSecurity setting to
+          input.conf in profiles/input/device.h, profiles/input/hog.c,
+          profiles/input/input.conf, profiles/input/manager.c.
+        - CVE-2020-0556
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/381570
+
+  [ Konrad Zapałowicz <konrad.zapalowicz@canonical.com> ]
+  * None
+    Merge-Proposal: https://code.launchpad.net/~kzapalowicz/snappy-hwe-snaps/+git/bluez/+merge/359045
+
+  [ Changes in staged packages ]
+  
+  No changes for staged packages
+  
 2018-06-21 bluez 5.47-3
 
 2018-06-20 bluez 5.47-2
