@@ -139,6 +139,7 @@ parts:
       - libudev-dev
       - libreadline-dev
       - libical-dev
+      - libjson-c-dev
       - check
     prime:
       - usr/lib/bluetooth/bluetoothd
