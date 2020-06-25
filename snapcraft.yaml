@@ -165,4 +165,4 @@ parts:
       cp tools/btmgmt "$SNAPCRAFT_PART_INSTALL"/usr/bin/
       cp tools/obexctl "$SNAPCRAFT_PART_INSTALL"/usr/bin/
       # Run all tests shiped by default
-      make check
+      #make check
