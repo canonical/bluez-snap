@@ -1,3 +1,27 @@
+2020-06-25 bluez 5.53-1
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * snap: copy changelog to package
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/372528
+  * Add missins libjson build dependency
+    Use stack-snaps-tools to check versions
+    Copy changelog to snap/ dir in snap
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/386389
+
+  [ Konrad Zapałowicz <konrad.zapalowicz@canonical.com> ]
+  * None
+    Merge-Proposal: https://code.launchpad.net/~kzapalowicz/snappy-hwe-snaps/+git/bluez/+merge/359045
+
+  [ Changes in primed packages ]
+  
+  bluez (5.53-0ubuntu3): new primed package
+  
+  bluez-hcidump (5.53-0ubuntu3): new primed package
+  
+  bluez-obexd (5.53-0ubuntu3): new primed package
+  
+  libical1a: not primed anymore
+  
 2018-06-21 bluez 5.47-3
 
 2018-06-20 bluez 5.47-2
