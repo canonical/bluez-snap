@@ -1,3 +1,13 @@
+2020-07-03 bluez 5.48-1
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * Update to bluez 5.48, which puts us in sync with the bionic version.
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/386802
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2020-04-02 bluez 5.47-4
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
