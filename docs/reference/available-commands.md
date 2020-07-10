@@ -24,12 +24,16 @@ table lists the commands that are provided by the *bluez* snap:
 | hciattach    | Attach a serial UART to the BT stack as a transport interface |
 | hcitool      | Tool used to configure Bluetooth connections                  |
 | sdptool      | A tool to perform SDP queries on Bluetooth devices            |
+| btattach     | The successor to hciattach since bluez 5.37                   |
+| btmgmt       |  Tool for management of the bluez daemon                      |
+| btmon        | Bluetooth event monitoring                                    |
+| meshctl      | Used to provision mesh devices                                |
 
 There is a quick way of checking what a snap provides. To do this you can use
 the snap scheme for exposing commands which is *snap_name.command*. To see
 all the commands provided by the *bluez* snap type:
 
-```
+```text
 $ bluez.<TAB><TAB>
 ```
 
@@ -37,9 +41,10 @@ The double **TAB** indicates that you should hit the tab key twice for bash
 auto-completion to kick in. Immediately you will see a list of
 available commands:
 
-```
+```text
 $ bluez.
-bluez.bluetoothctl  bluez.hciattach     bluez.hciconfig     bluez.hcidump
-bluez.hcitool       bluez.obexctl       bluez.sdptool       
+bluez.bluetoothctl  bluez.btmon         bluez.hcidump       bluez.obexctl
+bluez.btattach      bluez.hciattach     bluez.hcitool       bluez.sdptool
+bluez.btmgmt        bluez.hciconfig     bluez.meshctl 
 $ bluez.
 ```
