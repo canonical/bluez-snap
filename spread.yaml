@@ -26,8 +26,10 @@ environment:
 
 backends:
     qemu:
+        memory: 4G
         systems:
-            - ubuntu-core-16:
+            - ubuntu-core-20:
+                bios: /usr/share/OVMF/OVMF_CODE.fd
                 username: test
                 password: test
 
@@ -44,7 +46,7 @@ suites:
     tests/main/:
         summary: Full-system tests for BlueZ
         systems:
-            - ubuntu-core-16
+            - ubuntu-core-20
         prepare: |
             . $TESTSLIB/prepare.sh
         restore-each: |
