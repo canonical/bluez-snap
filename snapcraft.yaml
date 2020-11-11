@@ -29,7 +29,7 @@ apps:
     command: "usr/lib/bluetooth/bluetoothd -E"
     daemon: simple
     slots: [service]
-    plugs: [uhid]
+    plugs: [uhid, uinput, kernel-crypto-api]
   obex:
     command: "usr/lib/bluetooth/obexd"
     daemon: simple
@@ -65,8 +65,6 @@ apps:
 plugs:
   client:
       interface: bluez
-  uinput:
-  kernel-crypto-api:
 
 slots:
   service:
