@@ -1,3 +1,17 @@
+2020-11-12 bluez 5.53-2
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * tests: run tests now on UC20 image
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/387359
+
+  [ Kyle Nitzsche <kyle.nitzsche@canonical.com> ]
+  * Add two plugs: uinput and kernel-krypto-api
+    Merge-Proposal: https://code.launchpad.net/~knitzsche/snappy-hwe-snaps/+git/bluez/+merge/393605
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2020-06-25 bluez 5.53-1
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
