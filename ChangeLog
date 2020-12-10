@@ -1,3 +1,14 @@
+2020-12-10 bluez 5.53-3
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * * Fix obexd crash (LP#1907498) - thanks Dan Dedrick
+    * Rebuild to fix CVE-2020-27348 (see https://ubuntu.com/security/notices/USN-4661-1)
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/395128
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2020-11-12 bluez 5.53-2
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
