@@ -1,9 +1,9 @@
-snapcraft-version: 4.4.1
-snapcraft-started-at: '2020-11-12T09:41:53.020919Z'
+snapcraft-version: 4.4.4
+snapcraft-started-at: '2020-12-10T13:21:57.851613Z'
 snapcraft-os-release-id: ubuntu
 snapcraft-os-release-version-id: '20.04'
 name: bluez
-version: 5.53-2
+version: 5.53-3
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -135,7 +135,7 @@ parts:
     - adduser=3.118ubuntu2
     - advancecomp=2.1-2.1build1
     - apparmor=2.13.3-7ubuntu5.1
-    - apt=2.0.2ubuntu0.1
+    - apt=2.0.2ubuntu0.2
     - autoconf=2.69-11.1
     - automake=1:1.16.1-4ubuntu6
     - autopoint=0.19.8.1-10build1
@@ -190,7 +190,7 @@ parts:
     - init=1.57
     - libacl1=2.2.53-6
     - libapparmor1=2.13.3-7ubuntu5.1
-    - libapt-pkg6.0=2.0.2ubuntu0.1
+    - libapt-pkg6.0=2.0.2ubuntu0.2
     - libargon2-1=0~20171227-0.2
     - libasan5=9.3.0-17ubuntu1~20.04
     - libasn1-8-heimdal=7.7.0+dfsg-1ubuntu1
@@ -220,7 +220,7 @@ parts:
     - libcryptsetup12=2:2.2.2-3ubuntu2.3
     - libctf-nobfd0=2.34-6ubuntu1
     - libctf0=2.34-6ubuntu1
-    - libcurl3-gnutls=7.68.0-1ubuntu2.2
+    - libcurl3-gnutls=7.68.0-1ubuntu2.4
     - libdb-dev=1:5.3.21~exp1ubuntu2
     - libdb5.3-dev=5.3.28+dfsg1-0.6ubuntu2
     - libdb5.3=5.3.28+dfsg1-0.6ubuntu2
@@ -258,7 +258,7 @@ parts:
     - libgnutls30=3.6.13-2ubuntu1.3
     - libgomp1=10.2.0-5ubuntu1~20.04
     - libgpg-error0=1.37-1
-    - libgssapi-krb5-2=1.17-6ubuntu4
+    - libgssapi-krb5-2=1.17-6ubuntu4.1
     - libgssapi3-heimdal=7.7.0+dfsg-1ubuntu1
     - libhcrypto4-heimdal=7.7.0+dfsg-1ubuntu1
     - libheimbase1-heimdal=7.7.0+dfsg-1ubuntu1
@@ -275,14 +275,14 @@ parts:
     - libitm1=10.2.0-5ubuntu1~20.04
     - libjson-c-dev=0.13.1+dfsg-7ubuntu0.3
     - libjson-c4=0.13.1+dfsg-7ubuntu0.3
-    - libk5crypto3=1.17-6ubuntu4
+    - libk5crypto3=1.17-6ubuntu4.1
     - libkeyutils1=1.6-6ubuntu1
     - libkmod2=27-1ubuntu2
     - libkrb5-26-heimdal=7.7.0+dfsg-1ubuntu1
-    - libkrb5-3=1.17-6ubuntu4
-    - libkrb5support0=1.17-6ubuntu4
-    - libldap-2.4-2=2.4.49+dfsg-2ubuntu1.4
-    - libldap-common=2.4.49+dfsg-2ubuntu1.4
+    - libkrb5-3=1.17-6ubuntu4.1
+    - libkrb5support0=1.17-6ubuntu4.1
+    - libldap-2.4-2=2.4.49+dfsg-2ubuntu1.5
+    - libldap-common=2.4.49+dfsg-2ubuntu1.5
     - liblockfile-bin=1.16-1.1
     - liblockfile1=1.16-1.1
     - liblsan0=10.2.0-5ubuntu1~20.04
@@ -344,7 +344,7 @@ parts:
     - libsquashfuse0=0.1.103-2
     - libss2=1.45.5-2ubuntu1
     - libssh-4=0.9.3-2ubuntu2.1
-    - libssl1.1=1.1.1f-1ubuntu2
+    - libssl1.1=1.1.1f-1ubuntu2.1
     - libstdc++-9-dev=9.3.0-17ubuntu1~20.04
     - libstdc++6=10.2.0-5ubuntu1~20.04
     - libsubunit-dev=1.4.0-0ubuntu1
@@ -362,7 +362,7 @@ parts:
     - libwind0-heimdal=7.7.0+dfsg-1ubuntu1
     - libwrap0=7.6.q-30
     - libzstd1=1.4.4+dfsg-3
-    - linux-libc-dev=5.4.0-53.59
+    - linux-libc-dev=5.4.0-54.60
     - lockfile-progs=0.1.18
     - login=1:4.8.1-1ubuntu5.20.04
     - logsave=1.45.5-2ubuntu1
@@ -375,7 +375,7 @@ parts:
     - ncurses-base=6.2-0ubuntu2
     - ncurses-bin=6.2-0ubuntu2
     - openssh-client=1:8.2p1-4ubuntu0.1
-    - openssl=1.1.1f-1ubuntu2
+    - openssl=1.1.1f-1ubuntu2.1
     - optipng=0.7.7-1
     - passwd=1:4.8.1-1ubuntu5.20.04
     - patch=2.7.6-6
@@ -396,7 +396,7 @@ parts:
     - readline-common=8.0-4
     - sed=4.7-1
     - sensible-utils=0.0.12+nmu1
-    - snapd=2.47.1+20.04
+    - snapd=2.48+20.04
     - socat=1.7.3.3-2
     - squashfs-tools=1:4.4-1
     - squashfuse=0.1.103-2
@@ -416,15 +416,15 @@ parts:
     - zlib1g=1:1.2.11.dfsg-2ubuntu1.2
     installed-snaps:
     - core18=1932
-    - core20=634
-    - snapcraft=5737
-    - snapd=9721
+    - core20=875
+    - snapcraft=5821
+    - snapd=10492
     override-build: |
       set -ex
-      "/build/ci-bluez-3oqb3rmsmt1zgm7r/stage"/build-tools/check-versions bluez yes
+      "/build/ci-bluez-kk7cm7tfuazhjeob/stage"/build-tools/check-versions bluez yes
       git config user.email "snapcraft@canonical.com"
       git config user.name "snapcraft"
-      git am "/build/ci-bluez-3oqb3rmsmt1zgm7r"/patch/*
+      git am "/build/ci-bluez-kk7cm7tfuazhjeob"/patch/*
       snapcraftctl build
       cp tools/btmgmt "$SNAPCRAFT_PART_INSTALL"/usr/bin/
       cp tools/obexctl "$SNAPCRAFT_PART_INSTALL"/usr/bin/
@@ -453,15 +453,15 @@ parts:
     source-type: git
     stage: []
     stage-packages: []
-    uname: 'Linux 4.15.0-123-generic #126-Ubuntu SMP Wed Oct 21 09:40:11 UTC 2020
-      x86_64 x86_64 x86_64 GNU/Linux'
+    uname: 'Linux 4.15.0-124-generic #127-Ubuntu SMP Fri Nov 6 10:54:43 UTC 2020 x86_64
+      x86_64 x86_64 GNU/Linux'
   bluez-common:
     build-packages: []
     installed-packages:
     - adduser=3.118ubuntu2
     - advancecomp=2.1-2.1build1
     - apparmor=2.13.3-7ubuntu5.1
-    - apt=2.0.2ubuntu0.1
+    - apt=2.0.2ubuntu0.2
     - autoconf=2.69-11.1
     - automake=1:1.16.1-4ubuntu6
     - autopoint=0.19.8.1-10build1
@@ -516,7 +516,7 @@ parts:
     - init=1.57
     - libacl1=2.2.53-6
     - libapparmor1=2.13.3-7ubuntu5.1
-    - libapt-pkg6.0=2.0.2ubuntu0.1
+    - libapt-pkg6.0=2.0.2ubuntu0.2
     - libargon2-1=0~20171227-0.2
     - libasan5=9.3.0-17ubuntu1~20.04
     - libasn1-8-heimdal=7.7.0+dfsg-1ubuntu1
@@ -546,7 +546,7 @@ parts:
     - libcryptsetup12=2:2.2.2-3ubuntu2.3
     - libctf-nobfd0=2.34-6ubuntu1
     - libctf0=2.34-6ubuntu1
-    - libcurl3-gnutls=7.68.0-1ubuntu2.2
+    - libcurl3-gnutls=7.68.0-1ubuntu2.4
     - libdb-dev=1:5.3.21~exp1ubuntu2
     - libdb5.3-dev=5.3.28+dfsg1-0.6ubuntu2
     - libdb5.3=5.3.28+dfsg1-0.6ubuntu2
@@ -584,7 +584,7 @@ parts:
     - libgnutls30=3.6.13-2ubuntu1.3
     - libgomp1=10.2.0-5ubuntu1~20.04
     - libgpg-error0=1.37-1
-    - libgssapi-krb5-2=1.17-6ubuntu4
+    - libgssapi-krb5-2=1.17-6ubuntu4.1
     - libgssapi3-heimdal=7.7.0+dfsg-1ubuntu1
     - libhcrypto4-heimdal=7.7.0+dfsg-1ubuntu1
     - libheimbase1-heimdal=7.7.0+dfsg-1ubuntu1
@@ -601,14 +601,14 @@ parts:
     - libitm1=10.2.0-5ubuntu1~20.04
     - libjson-c-dev=0.13.1+dfsg-7ubuntu0.3
     - libjson-c4=0.13.1+dfsg-7ubuntu0.3
-    - libk5crypto3=1.17-6ubuntu4
+    - libk5crypto3=1.17-6ubuntu4.1
     - libkeyutils1=1.6-6ubuntu1
     - libkmod2=27-1ubuntu2
     - libkrb5-26-heimdal=7.7.0+dfsg-1ubuntu1
-    - libkrb5-3=1.17-6ubuntu4
-    - libkrb5support0=1.17-6ubuntu4
-    - libldap-2.4-2=2.4.49+dfsg-2ubuntu1.4
-    - libldap-common=2.4.49+dfsg-2ubuntu1.4
+    - libkrb5-3=1.17-6ubuntu4.1
+    - libkrb5support0=1.17-6ubuntu4.1
+    - libldap-2.4-2=2.4.49+dfsg-2ubuntu1.5
+    - libldap-common=2.4.49+dfsg-2ubuntu1.5
     - liblockfile-bin=1.16-1.1
     - liblockfile1=1.16-1.1
     - liblsan0=10.2.0-5ubuntu1~20.04
@@ -670,7 +670,7 @@ parts:
     - libsquashfuse0=0.1.103-2
     - libss2=1.45.5-2ubuntu1
     - libssh-4=0.9.3-2ubuntu2.1
-    - libssl1.1=1.1.1f-1ubuntu2
+    - libssl1.1=1.1.1f-1ubuntu2.1
     - libstdc++-9-dev=9.3.0-17ubuntu1~20.04
     - libstdc++6=10.2.0-5ubuntu1~20.04
     - libsubunit-dev=1.4.0-0ubuntu1
@@ -688,7 +688,7 @@ parts:
     - libwind0-heimdal=7.7.0+dfsg-1ubuntu1
     - libwrap0=7.6.q-30
     - libzstd1=1.4.4+dfsg-3
-    - linux-libc-dev=5.4.0-53.59
+    - linux-libc-dev=5.4.0-54.60
     - lockfile-progs=0.1.18
     - login=1:4.8.1-1ubuntu5.20.04
     - logsave=1.45.5-2ubuntu1
@@ -701,7 +701,7 @@ parts:
     - ncurses-base=6.2-0ubuntu2
     - ncurses-bin=6.2-0ubuntu2
     - openssh-client=1:8.2p1-4ubuntu0.1
-    - openssl=1.1.1f-1ubuntu2
+    - openssl=1.1.1f-1ubuntu2.1
     - optipng=0.7.7-1
     - passwd=1:4.8.1-1ubuntu5.20.04
     - patch=2.7.6-6
@@ -722,7 +722,7 @@ parts:
     - readline-common=8.0-4
     - sed=4.7-1
     - sensible-utils=0.0.12+nmu1
-    - snapd=2.47.1+20.04
+    - snapd=2.48+20.04
     - socat=1.7.3.3-2
     - squashfs-tools=1:4.4-1
     - squashfuse=0.1.103-2
@@ -742,9 +742,9 @@ parts:
     - zlib1g=1:1.2.11.dfsg-2ubuntu1.2
     installed-snaps:
     - core18=1932
-    - core20=634
-    - snapcraft=5737
-    - snapd=9721
+    - core20=875
+    - snapcraft=5821
+    - snapd=10492
     organize:
       client-wrapper: bin/client-wrapper
     plugin: dump
@@ -752,15 +752,15 @@ parts:
     source: bin/
     stage: []
     stage-packages: []
-    uname: 'Linux 4.15.0-123-generic #126-Ubuntu SMP Wed Oct 21 09:40:11 UTC 2020
-      x86_64 x86_64 x86_64 GNU/Linux'
+    uname: 'Linux 4.15.0-124-generic #127-Ubuntu SMP Fri Nov 6 10:54:43 UTC 2020 x86_64
+      x86_64 x86_64 GNU/Linux'
   changelog:
     build-packages: []
     installed-packages:
     - adduser=3.118ubuntu2
     - advancecomp=2.1-2.1build1
     - apparmor=2.13.3-7ubuntu5.1
-    - apt=2.0.2ubuntu0.1
+    - apt=2.0.2ubuntu0.2
     - autoconf=2.69-11.1
     - automake=1:1.16.1-4ubuntu6
     - autopoint=0.19.8.1-10build1
@@ -815,7 +815,7 @@ parts:
     - init=1.57
     - libacl1=2.2.53-6
     - libapparmor1=2.13.3-7ubuntu5.1
-    - libapt-pkg6.0=2.0.2ubuntu0.1
+    - libapt-pkg6.0=2.0.2ubuntu0.2
     - libargon2-1=0~20171227-0.2
     - libasan5=9.3.0-17ubuntu1~20.04
     - libasn1-8-heimdal=7.7.0+dfsg-1ubuntu1
@@ -845,7 +845,7 @@ parts:
     - libcryptsetup12=2:2.2.2-3ubuntu2.3
     - libctf-nobfd0=2.34-6ubuntu1
     - libctf0=2.34-6ubuntu1
-    - libcurl3-gnutls=7.68.0-1ubuntu2.2
+    - libcurl3-gnutls=7.68.0-1ubuntu2.4
     - libdb-dev=1:5.3.21~exp1ubuntu2
     - libdb5.3-dev=5.3.28+dfsg1-0.6ubuntu2
     - libdb5.3=5.3.28+dfsg1-0.6ubuntu2
@@ -883,7 +883,7 @@ parts:
     - libgnutls30=3.6.13-2ubuntu1.3
     - libgomp1=10.2.0-5ubuntu1~20.04
     - libgpg-error0=1.37-1
-    - libgssapi-krb5-2=1.17-6ubuntu4
+    - libgssapi-krb5-2=1.17-6ubuntu4.1
     - libgssapi3-heimdal=7.7.0+dfsg-1ubuntu1
     - libhcrypto4-heimdal=7.7.0+dfsg-1ubuntu1
     - libheimbase1-heimdal=7.7.0+dfsg-1ubuntu1
@@ -900,14 +900,14 @@ parts:
     - libitm1=10.2.0-5ubuntu1~20.04
     - libjson-c-dev=0.13.1+dfsg-7ubuntu0.3
     - libjson-c4=0.13.1+dfsg-7ubuntu0.3
-    - libk5crypto3=1.17-6ubuntu4
+    - libk5crypto3=1.17-6ubuntu4.1
     - libkeyutils1=1.6-6ubuntu1
     - libkmod2=27-1ubuntu2
     - libkrb5-26-heimdal=7.7.0+dfsg-1ubuntu1
-    - libkrb5-3=1.17-6ubuntu4
-    - libkrb5support0=1.17-6ubuntu4
-    - libldap-2.4-2=2.4.49+dfsg-2ubuntu1.4
-    - libldap-common=2.4.49+dfsg-2ubuntu1.4
+    - libkrb5-3=1.17-6ubuntu4.1
+    - libkrb5support0=1.17-6ubuntu4.1
+    - libldap-2.4-2=2.4.49+dfsg-2ubuntu1.5
+    - libldap-common=2.4.49+dfsg-2ubuntu1.5
     - liblockfile-bin=1.16-1.1
     - liblockfile1=1.16-1.1
     - liblsan0=10.2.0-5ubuntu1~20.04
@@ -969,7 +969,7 @@ parts:
     - libsquashfuse0=0.1.103-2
     - libss2=1.45.5-2ubuntu1
     - libssh-4=0.9.3-2ubuntu2.1
-    - libssl1.1=1.1.1f-1ubuntu2
+    - libssl1.1=1.1.1f-1ubuntu2.1
     - libstdc++-9-dev=9.3.0-17ubuntu1~20.04
     - libstdc++6=10.2.0-5ubuntu1~20.04
     - libsubunit-dev=1.4.0-0ubuntu1
@@ -987,7 +987,7 @@ parts:
     - libwind0-heimdal=7.7.0+dfsg-1ubuntu1
     - libwrap0=7.6.q-30
     - libzstd1=1.4.4+dfsg-3
-    - linux-libc-dev=5.4.0-53.59
+    - linux-libc-dev=5.4.0-54.60
     - lockfile-progs=0.1.18
     - login=1:4.8.1-1ubuntu5.20.04
     - logsave=1.45.5-2ubuntu1
@@ -1000,7 +1000,7 @@ parts:
     - ncurses-base=6.2-0ubuntu2
     - ncurses-bin=6.2-0ubuntu2
     - openssh-client=1:8.2p1-4ubuntu0.1
-    - openssl=1.1.1f-1ubuntu2
+    - openssl=1.1.1f-1ubuntu2.1
     - optipng=0.7.7-1
     - passwd=1:4.8.1-1ubuntu5.20.04
     - patch=2.7.6-6
@@ -1021,7 +1021,7 @@ parts:
     - readline-common=8.0-4
     - sed=4.7-1
     - sensible-utils=0.0.12+nmu1
-    - snapd=2.47.1+20.04
+    - snapd=2.48+20.04
     - socat=1.7.3.3-2
     - squashfs-tools=1:4.4-1
     - squashfuse=0.1.103-2
@@ -1041,20 +1041,20 @@ parts:
     - zlib1g=1:1.2.11.dfsg-2ubuntu1.2
     installed-snaps:
     - core18=1932
-    - core20=634
-    - snapcraft=5737
-    - snapd=9721
+    - core20=875
+    - snapcraft=5821
+    - snapd=10492
     organize:
       ChangeLog: snap/ChangeLog
-    override-build: 'cp "/build/ci-bluez-3oqb3rmsmt1zgm7r"/ChangeLog "$SNAPCRAFT_PART_INSTALL"
+    override-build: 'cp "/build/ci-bluez-kk7cm7tfuazhjeob"/ChangeLog "$SNAPCRAFT_PART_INSTALL"
 
 '
     plugin: nil
     prime: []
     stage: []
     stage-packages: []
-    uname: 'Linux 4.15.0-123-generic #126-Ubuntu SMP Wed Oct 21 09:40:11 UTC 2020
-      x86_64 x86_64 x86_64 GNU/Linux'
+    uname: 'Linux 4.15.0-124-generic #127-Ubuntu SMP Fri Nov 6 10:54:43 UTC 2020 x86_64
+      x86_64 x86_64 GNU/Linux'
   stack-snaps-tools:
     build-packages:
     - dpkg-dev
@@ -1062,9 +1062,9 @@ parts:
     installed-packages: []
     installed-snaps:
     - core18=1932
-    - core20=634
-    - snapcraft=5737
-    - snapd=9721
+    - core20=875
+    - snapcraft=5821
+    - snapd=10492
     override-build: |
       set -ex
       find "$SNAPCRAFT_PART_INSTALL"/ -type f,l \
@@ -1081,7 +1081,7 @@ parts:
     source: https://git.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/stack-snaps-tools
     source-branch: ''
     source-checksum: ''
-    source-commit: bce2b22e08147db49e9cd23c6c161a2683b3b8a3
+    source-commit: 31fa19de757bdd1dfd3ed9e4986c58e837bb7df2
     source-tag: ''
     source-type: git
     stage: []
@@ -1114,12 +1114,12 @@ parts:
     - libtinfo6=6.2-0ubuntu2
     - libudev1=245.4-4ubuntu3.3
     - zlib1g=1:1.2.11.dfsg-2ubuntu1.2
-    uname: 'Linux 4.15.0-123-generic #126-Ubuntu SMP Wed Oct 21 09:40:11 UTC 2020
-      x86_64 x86_64 x86_64 GNU/Linux'
+    uname: 'Linux 4.15.0-124-generic #127-Ubuntu SMP Fri Nov 6 10:54:43 UTC 2020 x86_64
+      x86_64 x86_64 GNU/Linux'
 architectures:
 - amd64
 image-info:
-  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-3oqb3rmsmt1zgm7r/+build/1181162
+  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-kk7cm7tfuazhjeob/+build/1214256
 build-packages:
 - autoconf=2.69-11.1
 - automake=1:1.16.1-4ubuntu6
@@ -1181,7 +1181,7 @@ build-packages:
 - uuid-dev=2.34-0.1ubuntu9.1
 - zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.2
 build-snaps:
-- core20=634
+- core20=875
 primed-stage-packages:
 - bluez-hcidump=5.53-0ubuntu3
 - bluez-obexd=5.53-0ubuntu3
