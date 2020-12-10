@@ -1,0 +1,31 @@
+From 8ef25c6ffef5786529b6dd292f6f5597c1dbfd4f Mon Sep 17 00:00:00 2001
+From: Dan Dedrick <dan_dedrick@jabil.com>
+Date: Wed, 9 Dec 2020 11:57:36 -0500
+Subject: [PATCH] obexd: don't free environment variable
+
+Use g_strdup for option_root since it is expected to be freeable. When
+this was assigned to an environement variable it would then be passed to
+g_free and cause a crash because it wasn't memory that had been
+malloced.
+---
+ obexd/src/main.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/obexd/src/main.c b/obexd/src/main.c
+index 118b5a1a9..ddea9fbd5 100644
+--- a/obexd/src/main.c
++++ b/obexd/src/main.c
+@@ -285,7 +285,9 @@ int main(int argc, char *argv[])
+ 	}
+ 
+ 	if (option_root == NULL) {
+-		option_root = getenv("SNAP_USER_DATA");
++		const char * root_env = getenv("SNAP_USER_DATA");
++		if (root_env)
++			option_root = g_strdup(root_env);
+ 
+ 		if (!option_root)
+ 			option_root = g_build_filename(g_get_user_cache_dir(),
+-- 
+2.29.2
+
