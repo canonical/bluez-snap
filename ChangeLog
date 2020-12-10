@@ -1,3 +1,20 @@
+2020-12-10 bluez 5.48-2
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * docs: update to match current state
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/387204
+  * * Fix obexd crash (LP#1907498) - thanks Dan Dedrick
+      (source branch MP:
+       https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/395147)
+    * Rebuild to fix CVE-2020-27348 (see https://ubuntu.com/security/notices/USN-4661-1)
+    * Move icon to snap/gui
+      See https://snapcraft.io/docs/deprecation-notice-3
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/395150
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2020-07-03 bluez 5.48-1
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
