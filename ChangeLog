@@ -1,3 +1,33 @@
+2021-06-17 bluez 5.53-4
+
+  [ Changes in primed packages ]
+  
+  bluez, bluez-hcidump, bluez-obexd (built from bluez) updated from 5.53-0ubuntu3 to 5.53-0ubuntu3.2:
+  
+    bluez (5.53-0ubuntu3.2) focal-security; urgency=medium
+  
+      * SECURITY UPDATE: secure pairing passkey brute force
+        - debian/patches/CVE-2020-26558.patch: fix not properly checking for
+          secure flags in src/shared/att-types.h, src/shared/gatt-server.c.
+        - CVE-2020-26558
+      * SECURITY UPDATE: DoS or code execution via double-free
+        - debian/patches/CVE-2020-27153.patch: fix possible crash on disconnect
+          in src/shared/att.c.
+        - CVE-2020-27153
+      * SECURITY UPDATE: info disclosure via out of bounds read
+        - debian/patches/CVE-2021-3588.patch: when client features is read
+          check if the offset is within the cli_feat bounds in
+          src/gatt-database.c.
+        - CVE-2021-3588
+  
+     -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 09 Jun 2021 11:06:38 -0400
+  
+    bluez (5.53-0ubuntu3.1) focal; urgency=medium
+  
+      * Add support for the pi 400 (LP: #1903048)
+  
+     -- William 'jawn-smith' Wilson <william.wilson@canonical.com>  Mon, 15 Mar 2021 19:25:22 +0000
+  
 2020-12-10 bluez 5.53-3
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
