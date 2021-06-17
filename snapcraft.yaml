@@ -117,7 +117,7 @@ parts:
     plugin: autotools
     source: https://git.launchpad.net/ubuntu/+source/bluez
     source-type: git
-    source-branch: applied/ubuntu/focal
+    source-branch: applied/ubuntu/focal-updates
     autotools-configure-parameters:
       - --prefix=/usr
       - --libexec=/usr/lib/
