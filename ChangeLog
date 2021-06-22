@@ -1,3 +1,24 @@
+2021-06-22 bluez 5.48-3
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * Fix for USN-4989-2 (https://ubuntu.com/security/notices/USN-4989-2):
+    
+    * SECURITY UPDATE: secure pairing passkey brute force
+      - debian/patches/CVE-2020-26558.patch: fix not properly checking for
+        secure flags in src/shared/att-types.h, src/shared/gatt-server.c.
+      - CVE-2020-26558
+    * SECURITY UPDATE: DoS or code execution via double-free
+      - debian/patches/CVE-2020-27153.patch: fix possible crash on disconnect
+        in src/shared/att.c.
+      - CVE-2020-27153
+    
+    (commits in bluez/5.48 branch)
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/404522
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2020-12-10 bluez 5.48-2
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
