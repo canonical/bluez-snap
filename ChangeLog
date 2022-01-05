@@ -1,3 +1,45 @@
+2022-01-05 bluez 5.53-5
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * Add wrapper script for bluetoothd
+    
+    Add wrapper script for bluetoothd so we can enable debug traces if the
+    debug.enable snap option is set.
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/413625
+
+  [ Changes in primed packages ]
+  
+  bluez, bluez-hcidump, bluez-obexd (built from bluez) updated from 5.53-0ubuntu3.2 to 5.53-0ubuntu3.4:
+  
+    bluez (5.53-0ubuntu3.4) focal-security; urgency=medium
+  
+      * SECURITY UPDATE: incorrect discoverable status
+        - debian/patches/CVE-2021-3658.patch: fix storing discoverable setting
+          in src/adapter.c.
+        - CVE-2021-3658
+      * SECURITY UPDATE: DoS via memory leak in sdp_cstate_alloc_buf
+        - debian/patches/CVE-2021-41229.patch: fix leaking buffers stored in
+          cstates cache in src/sdpd-request.c, src/sdpd-server.c, src/sdpd.h,
+          unit/test-sdp.c.
+        - CVE-2021-41229
+      * SECURITY UPDATE: use-after-free when client disconnects
+        - debian/patches/CVE-2021-43400-pre1.patch: fix Acquire* reply handling
+          in src/gatt-database.c.
+        - debian/patches/CVE-2021-43400-pre2.patch: no multiple calls to
+          AcquireWrite in src/gatt-database.c.
+        - debian/patches/CVE-2021-43400.patch: fix not cleaning up when
+          disconnected in src/gatt-database.c.
+        - CVE-2021-43400
+  
+     -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 17 Nov 2021 10:19:15 -0500
+  
+    bluez (5.53-0ubuntu3.3) focal; urgency=medium
+  
+      * debian/patches/0001-fix-reading-from-rfkill-socket.patch:
+        - fix reading from rfkill socket (lp: #1933221)
+  
+     -- Andy Chi <andy.chi@canonical.com>  Tue, 22 Jun 2021 14:27:12 +0800
+  
 2021-06-17 bluez 5.53-4
 
   [ Changes in primed packages ]
