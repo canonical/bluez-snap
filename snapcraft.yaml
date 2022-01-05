@@ -26,7 +26,7 @@ apps:
     command: bin/client-wrapper usr/bin/obexctl
     plugs: [client]
   bluez:
-    command: "usr/lib/bluetooth/bluetoothd -E"
+    command: bin/bluetoothd-wrapper
     daemon: simple
     slots: [service]
     plugs: [uhid, uinput, kernel-crypto-api]
@@ -77,6 +77,7 @@ parts:
     source: bin/
     organize:
       client-wrapper: bin/client-wrapper
+      bluetoothd-wrapper: bin/bluetoothd-wrapper
 
   changelog:
     plugin: nil
