@@ -1,9 +1,9 @@
-snapcraft-version: '6.0'
-snapcraft-started-at: '2022-01-05T09:31:15.691669Z'
+snapcraft-version: 6.0.2
+snapcraft-started-at: '2022-02-09T11:43:10.770496Z'
 snapcraft-os-release-id: ubuntu
 snapcraft-os-release-version-id: '20.04'
 name: bluez
-version: 5.53-5
+version: 5.53-6
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -156,6 +156,8 @@ parts:
     - cpp-9=9.3.0-17ubuntu1~20.04
     - cpp=4:9.3.0-1ubuntu2
     - dash=0.5.10.2-6
+    - dbus-user-session=1.12.16-2ubuntu2.1
+    - dbus=1.12.16-2ubuntu2.1
     - debconf=1.5.73
     - debianutils=4.9.1
     - diffutils=1:3.7-3
@@ -306,6 +308,7 @@ parts:
     - libpam-modules-bin=1.3.1-5ubuntu4.3
     - libpam-modules=1.3.1-5ubuntu4.3
     - libpam-runtime=1.3.1-5ubuntu4.3
+    - libpam-systemd=245.4-4ubuntu3.15
     - libpam0g=1.3.1-5ubuntu4.3
     - libpcre16-3=2:8.39-12build1
     - libpcre2-16-0=10.34-7
@@ -348,20 +351,20 @@ parts:
     - libstdc++6=10.3.0-1ubuntu1~20.04
     - libsubunit-dev=1.4.0-0ubuntu1
     - libsubunit0=1.4.0-0ubuntu1
-    - libsystemd0=245.4-4ubuntu3.14
+    - libsystemd0=245.4-4ubuntu3.15
     - libtasn1-6=4.16.0-2
     - libtinfo6=6.2-0ubuntu2
     - libtool=2.4.6-14
     - libtsan0=10.3.0-1ubuntu1~20.04
     - libubsan1=10.3.0-1ubuntu1~20.04
-    - libudev-dev=245.4-4ubuntu3.14
-    - libudev1=245.4-4ubuntu3.14
+    - libudev-dev=245.4-4ubuntu3.15
+    - libudev1=245.4-4ubuntu3.15
     - libunistring2=0.9.10-2
     - libuuid1=2.34-0.1ubuntu9.1
     - libwind0-heimdal=7.7.0+dfsg-1ubuntu1
     - libwrap0=7.6.q-30
     - libzstd1=1.4.4+dfsg-3ubuntu0.1
-    - linux-libc-dev=5.4.0-92.103
+    - linux-libc-dev=5.4.0-99.112
     - lockfile-progs=0.1.18
     - login=1:4.8.1-1ubuntu5.20.04.1
     - logsave=1.45.5-2ubuntu1
@@ -373,7 +376,7 @@ parts:
     - mount=2.34-0.1ubuntu9.1
     - ncurses-base=6.2-0ubuntu2
     - ncurses-bin=6.2-0ubuntu2
-    - openssh-client=1:8.2p1-4ubuntu0.3
+    - openssh-client=1:8.2p1-4ubuntu0.4
     - openssl=1.1.1f-1ubuntu2.10
     - optipng=0.7.7-1
     - passwd=1:4.8.1-1ubuntu5.20.04.1
@@ -395,34 +398,34 @@ parts:
     - readline-common=8.0-4
     - sed=4.7-1
     - sensible-utils=0.0.12+nmu1
-    - snapd=2.51.1+20.04ubuntu2
+    - snapd=2.54.2+20.04ubuntu2
     - socat=1.7.3.3-2
     - squashfs-tools=1:4.4-1ubuntu0.3
     - squashfuse=0.1.103-2
     - sudo=1.8.31-1ubuntu1.2
-    - systemd-sysv=245.4-4ubuntu3.14
-    - systemd-timesyncd=245.4-4ubuntu3.14
-    - systemd=245.4-4ubuntu3.14
+    - systemd-sysv=245.4-4ubuntu3.15
+    - systemd-timesyncd=245.4-4ubuntu3.15
+    - systemd=245.4-4ubuntu3.15
     - sysvinit-utils=2.96-2.1ubuntu1
     - tar=1.30+dfsg-7ubuntu0.20.04.1
     - tzdata=2021e-0ubuntu0.20.04
     - ubuntu-keyring=2020.02.11.4
-    - udev=245.4-4ubuntu3.14
+    - udev=245.4-4ubuntu3.15
     - util-linux=2.34-0.1ubuntu9.1
     - uuid-dev=2.34-0.1ubuntu9.1
     - xz-utils=5.2.4-1ubuntu1
     - zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.2
     - zlib1g=1:1.2.11.dfsg-2ubuntu1.2
     installed-snaps:
-    - core20=1274
-    - snapcraft=6956
-    - snapd=14296
+    - core20=1332
+    - snapcraft=7016
+    - snapd=14553
     override-build: |
       set -ex
-      "/build/ci-bluez-2e9i2scckdsuzatf/stage"/build-tools/check-versions bluez yes
+      "/build/ci-bluez-nw07ky05m2n6tl7p/stage"/build-tools/check-versions bluez yes
       git config user.email "snapcraft@canonical.com"
       git config user.name "snapcraft"
-      git am "/build/ci-bluez-2e9i2scckdsuzatf"/patch/*
+      git am "/build/ci-bluez-nw07ky05m2n6tl7p"/patch/*
       snapcraftctl build
       cp tools/btmgmt "$SNAPCRAFT_PART_INSTALL"/usr/bin/
       cp tools/obexctl "$SNAPCRAFT_PART_INSTALL"/usr/bin/
@@ -451,7 +454,7 @@ parts:
     source-type: git
     stage: []
     stage-packages: []
-    uname: 'Linux 4.15.0-166-generic #174-Ubuntu SMP Wed Dec 8 19:08:37 UTC 2021 aarch64
+    uname: 'Linux 4.15.0-167-generic #175-Ubuntu SMP Wed Jan 5 01:58:16 UTC 2022 aarch64
       aarch64 aarch64 GNU/Linux'
   bluez-common:
     build-packages: []
@@ -480,6 +483,8 @@ parts:
     - cpp-9=9.3.0-17ubuntu1~20.04
     - cpp=4:9.3.0-1ubuntu2
     - dash=0.5.10.2-6
+    - dbus-user-session=1.12.16-2ubuntu2.1
+    - dbus=1.12.16-2ubuntu2.1
     - debconf=1.5.73
     - debianutils=4.9.1
     - diffutils=1:3.7-3
@@ -630,6 +635,7 @@ parts:
     - libpam-modules-bin=1.3.1-5ubuntu4.3
     - libpam-modules=1.3.1-5ubuntu4.3
     - libpam-runtime=1.3.1-5ubuntu4.3
+    - libpam-systemd=245.4-4ubuntu3.15
     - libpam0g=1.3.1-5ubuntu4.3
     - libpcre16-3=2:8.39-12build1
     - libpcre2-16-0=10.34-7
@@ -672,20 +678,20 @@ parts:
     - libstdc++6=10.3.0-1ubuntu1~20.04
     - libsubunit-dev=1.4.0-0ubuntu1
     - libsubunit0=1.4.0-0ubuntu1
-    - libsystemd0=245.4-4ubuntu3.14
+    - libsystemd0=245.4-4ubuntu3.15
     - libtasn1-6=4.16.0-2
     - libtinfo6=6.2-0ubuntu2
     - libtool=2.4.6-14
     - libtsan0=10.3.0-1ubuntu1~20.04
     - libubsan1=10.3.0-1ubuntu1~20.04
-    - libudev-dev=245.4-4ubuntu3.14
-    - libudev1=245.4-4ubuntu3.14
+    - libudev-dev=245.4-4ubuntu3.15
+    - libudev1=245.4-4ubuntu3.15
     - libunistring2=0.9.10-2
     - libuuid1=2.34-0.1ubuntu9.1
     - libwind0-heimdal=7.7.0+dfsg-1ubuntu1
     - libwrap0=7.6.q-30
     - libzstd1=1.4.4+dfsg-3ubuntu0.1
-    - linux-libc-dev=5.4.0-92.103
+    - linux-libc-dev=5.4.0-99.112
     - lockfile-progs=0.1.18
     - login=1:4.8.1-1ubuntu5.20.04.1
     - logsave=1.45.5-2ubuntu1
@@ -697,7 +703,7 @@ parts:
     - mount=2.34-0.1ubuntu9.1
     - ncurses-base=6.2-0ubuntu2
     - ncurses-bin=6.2-0ubuntu2
-    - openssh-client=1:8.2p1-4ubuntu0.3
+    - openssh-client=1:8.2p1-4ubuntu0.4
     - openssl=1.1.1f-1ubuntu2.10
     - optipng=0.7.7-1
     - passwd=1:4.8.1-1ubuntu5.20.04.1
@@ -719,28 +725,28 @@ parts:
     - readline-common=8.0-4
     - sed=4.7-1
     - sensible-utils=0.0.12+nmu1
-    - snapd=2.51.1+20.04ubuntu2
+    - snapd=2.54.2+20.04ubuntu2
     - socat=1.7.3.3-2
     - squashfs-tools=1:4.4-1ubuntu0.3
     - squashfuse=0.1.103-2
     - sudo=1.8.31-1ubuntu1.2
-    - systemd-sysv=245.4-4ubuntu3.14
-    - systemd-timesyncd=245.4-4ubuntu3.14
-    - systemd=245.4-4ubuntu3.14
+    - systemd-sysv=245.4-4ubuntu3.15
+    - systemd-timesyncd=245.4-4ubuntu3.15
+    - systemd=245.4-4ubuntu3.15
     - sysvinit-utils=2.96-2.1ubuntu1
     - tar=1.30+dfsg-7ubuntu0.20.04.1
     - tzdata=2021e-0ubuntu0.20.04
     - ubuntu-keyring=2020.02.11.4
-    - udev=245.4-4ubuntu3.14
+    - udev=245.4-4ubuntu3.15
     - util-linux=2.34-0.1ubuntu9.1
     - uuid-dev=2.34-0.1ubuntu9.1
     - xz-utils=5.2.4-1ubuntu1
     - zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.2
     - zlib1g=1:1.2.11.dfsg-2ubuntu1.2
     installed-snaps:
-    - core20=1274
-    - snapcraft=6956
-    - snapd=14296
+    - core20=1332
+    - snapcraft=7016
+    - snapd=14553
     organize:
       bluetoothd-wrapper: bin/bluetoothd-wrapper
       client-wrapper: bin/client-wrapper
@@ -749,7 +755,7 @@ parts:
     source: bin/
     stage: []
     stage-packages: []
-    uname: 'Linux 4.15.0-166-generic #174-Ubuntu SMP Wed Dec 8 19:08:37 UTC 2021 aarch64
+    uname: 'Linux 4.15.0-167-generic #175-Ubuntu SMP Wed Jan 5 01:58:16 UTC 2022 aarch64
       aarch64 aarch64 GNU/Linux'
   changelog:
     build-packages: []
@@ -778,6 +784,8 @@ parts:
     - cpp-9=9.3.0-17ubuntu1~20.04
     - cpp=4:9.3.0-1ubuntu2
     - dash=0.5.10.2-6
+    - dbus-user-session=1.12.16-2ubuntu2.1
+    - dbus=1.12.16-2ubuntu2.1
     - debconf=1.5.73
     - debianutils=4.9.1
     - diffutils=1:3.7-3
@@ -928,6 +936,7 @@ parts:
     - libpam-modules-bin=1.3.1-5ubuntu4.3
     - libpam-modules=1.3.1-5ubuntu4.3
     - libpam-runtime=1.3.1-5ubuntu4.3
+    - libpam-systemd=245.4-4ubuntu3.15
     - libpam0g=1.3.1-5ubuntu4.3
     - libpcre16-3=2:8.39-12build1
     - libpcre2-16-0=10.34-7
@@ -970,20 +979,20 @@ parts:
     - libstdc++6=10.3.0-1ubuntu1~20.04
     - libsubunit-dev=1.4.0-0ubuntu1
     - libsubunit0=1.4.0-0ubuntu1
-    - libsystemd0=245.4-4ubuntu3.14
+    - libsystemd0=245.4-4ubuntu3.15
     - libtasn1-6=4.16.0-2
     - libtinfo6=6.2-0ubuntu2
     - libtool=2.4.6-14
     - libtsan0=10.3.0-1ubuntu1~20.04
     - libubsan1=10.3.0-1ubuntu1~20.04
-    - libudev-dev=245.4-4ubuntu3.14
-    - libudev1=245.4-4ubuntu3.14
+    - libudev-dev=245.4-4ubuntu3.15
+    - libudev1=245.4-4ubuntu3.15
     - libunistring2=0.9.10-2
     - libuuid1=2.34-0.1ubuntu9.1
     - libwind0-heimdal=7.7.0+dfsg-1ubuntu1
     - libwrap0=7.6.q-30
     - libzstd1=1.4.4+dfsg-3ubuntu0.1
-    - linux-libc-dev=5.4.0-92.103
+    - linux-libc-dev=5.4.0-99.112
     - lockfile-progs=0.1.18
     - login=1:4.8.1-1ubuntu5.20.04.1
     - logsave=1.45.5-2ubuntu1
@@ -995,7 +1004,7 @@ parts:
     - mount=2.34-0.1ubuntu9.1
     - ncurses-base=6.2-0ubuntu2
     - ncurses-bin=6.2-0ubuntu2
-    - openssh-client=1:8.2p1-4ubuntu0.3
+    - openssh-client=1:8.2p1-4ubuntu0.4
     - openssl=1.1.1f-1ubuntu2.10
     - optipng=0.7.7-1
     - passwd=1:4.8.1-1ubuntu5.20.04.1
@@ -1017,38 +1026,38 @@ parts:
     - readline-common=8.0-4
     - sed=4.7-1
     - sensible-utils=0.0.12+nmu1
-    - snapd=2.51.1+20.04ubuntu2
+    - snapd=2.54.2+20.04ubuntu2
     - socat=1.7.3.3-2
     - squashfs-tools=1:4.4-1ubuntu0.3
     - squashfuse=0.1.103-2
     - sudo=1.8.31-1ubuntu1.2
-    - systemd-sysv=245.4-4ubuntu3.14
-    - systemd-timesyncd=245.4-4ubuntu3.14
-    - systemd=245.4-4ubuntu3.14
+    - systemd-sysv=245.4-4ubuntu3.15
+    - systemd-timesyncd=245.4-4ubuntu3.15
+    - systemd=245.4-4ubuntu3.15
     - sysvinit-utils=2.96-2.1ubuntu1
     - tar=1.30+dfsg-7ubuntu0.20.04.1
     - tzdata=2021e-0ubuntu0.20.04
     - ubuntu-keyring=2020.02.11.4
-    - udev=245.4-4ubuntu3.14
+    - udev=245.4-4ubuntu3.15
     - util-linux=2.34-0.1ubuntu9.1
     - uuid-dev=2.34-0.1ubuntu9.1
     - xz-utils=5.2.4-1ubuntu1
     - zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.2
     - zlib1g=1:1.2.11.dfsg-2ubuntu1.2
     installed-snaps:
-    - core20=1274
-    - snapcraft=6956
-    - snapd=14296
+    - core20=1332
+    - snapcraft=7016
+    - snapd=14553
     organize:
       ChangeLog: snap/ChangeLog
-    override-build: 'cp "/build/ci-bluez-2e9i2scckdsuzatf"/ChangeLog "$SNAPCRAFT_PART_INSTALL"
+    override-build: 'cp "/build/ci-bluez-nw07ky05m2n6tl7p"/ChangeLog "$SNAPCRAFT_PART_INSTALL"
 
 '
     plugin: nil
     prime: []
     stage: []
     stage-packages: []
-    uname: 'Linux 4.15.0-166-generic #174-Ubuntu SMP Wed Dec 8 19:08:37 UTC 2021 aarch64
+    uname: 'Linux 4.15.0-167-generic #175-Ubuntu SMP Wed Jan 5 01:58:16 UTC 2022 aarch64
       aarch64 aarch64 GNU/Linux'
   stack-snaps-tools:
     build-packages:
@@ -1056,9 +1065,9 @@ parts:
     - git
     installed-packages: []
     installed-snaps:
-    - core20=1274
-    - snapcraft=6956
-    - snapd=14296
+    - core20=1332
+    - snapcraft=7016
+    - snapd=14553
     override-build: |
       set -ex
       find "$SNAPCRAFT_PART_INSTALL"/ -type f,l \
@@ -1075,22 +1084,22 @@ parts:
     source: https://git.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/stack-snaps-tools
     source-branch: ''
     source-checksum: ''
-    source-commit: 2b4ce8ca481796f39c1f7d1ceb6ba79427ad1fbb
+    source-commit: 72edc7fcc2e0b998094a99360712a623520f86d9
     source-tag: ''
     source-type: git
     stage: []
     stage-packages:
-    - bluez-hcidump=5.53-0ubuntu3.4
-    - bluez-obexd=5.53-0ubuntu3.4
-    - bluez=5.53-0ubuntu3.4
+    - bluez-hcidump=5.53-0ubuntu3.5
+    - bluez-obexd=5.53-0ubuntu3.5
+    - bluez=5.53-0ubuntu3.5
     - libical3=3.0.8-1
     - libicu66=66.1-2ubuntu2.1
-    uname: 'Linux 4.15.0-166-generic #174-Ubuntu SMP Wed Dec 8 19:08:37 UTC 2021 aarch64
+    uname: 'Linux 4.15.0-167-generic #175-Ubuntu SMP Wed Jan 5 01:58:16 UTC 2022 aarch64
       aarch64 aarch64 GNU/Linux'
 architectures:
 - arm64
 image-info:
-  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-2e9i2scckdsuzatf/+build/1633723
+  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-nw07ky05m2n6tl7p/+build/1669107
 build-packages:
 - autoconf=2.69-11.1
 - automake=1:1.16.1-4ubuntu6
@@ -1107,7 +1116,6 @@ build-packages:
 - libcap-ng-dev=0.7.9-2.1build1
 - libdb-dev=1:5.3.21~exp1ubuntu2
 - libdb5.3-dev=5.3.28+dfsg1-0.6ubuntu2
-- libdbus-1-3=1.12.16-2ubuntu2.1
 - libdbus-1-dev=1.12.16-2ubuntu2.1
 - libdbus-glib-1-2=0.110-5fakssync1
 - libdbus-glib-1-dev-bin=0.110-5fakssync1
@@ -1144,7 +1152,7 @@ build-packages:
 - libsubunit-dev=1.4.0-0ubuntu1
 - libsubunit0=1.4.0-0ubuntu1
 - libtool=2.4.6-14
-- libudev-dev=245.4-4ubuntu3.14
+- libudev-dev=245.4-4ubuntu3.15
 - m4=1.4.18-4
 - pkg-config=0.29.1-0ubuntu4
 - python3-distutils=3.8.10-0ubuntu1~20.04
@@ -1152,8 +1160,8 @@ build-packages:
 - uuid-dev=2.34-0.1ubuntu9.1
 - zlib1g-dev=1:1.2.11.dfsg-2ubuntu1.2
 build-snaps:
-- core20=1274
+- core20=1332
 primed-stage-packages:
-- bluez-hcidump=5.53-0ubuntu3.4
-- bluez-obexd=5.53-0ubuntu3.4
-- bluez=5.53-0ubuntu3.4
+- bluez-hcidump=5.53-0ubuntu3.5
+- bluez-obexd=5.53-0ubuntu3.5
+- bluez=5.53-0ubuntu3.5
