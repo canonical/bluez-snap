@@ -1,3 +1,20 @@
+2022-02-09 bluez 5.53-6
+
+  [ Changes in primed packages ]
+  
+  bluez, bluez-hcidump, bluez-obexd (built from bluez) updated from 5.53-0ubuntu3.4 to 5.53-0ubuntu3.5:
+  
+    bluez (5.53-0ubuntu3.5) focal-security; urgency=medium
+      
+      * SECURITY UPDATE: Integer overflow in gatt server protocol could lead to
+        a heap overflow, resulting in denial of service or potential code
+        execution.
+        - debian/patches/CVE-2022-0204.patch: add length and offset validation in
+          write_cb function in src/shared/gatt-server.c.
+        - CVE-2022-0204
+  
+     -- Ray Veldkamp <ray.veldkamp@canonical.com>  Thu, 03 Feb 2022 22:27:07 +1100
+  
 2022-01-05 bluez 5.53-5
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
