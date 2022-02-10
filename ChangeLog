@@ -1,3 +1,57 @@
+2022-02-10 bluez 5.48-4
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * Update to 5.48-0ubuntu3.8 sources:
+    
+    bluez (5.48-0ubuntu3.8) bionic-security; urgency=medium
+    
+      * SECURITY UPDATE: Integer overflow in gatt server protocol could lead to
+        a heap overflow, resulting in denial of service or potential code
+        execution.
+        - debian/patches/CVE-2022-0204.patch: add length and offset validation in
+          write_cb function in src/shared/gatt-server.c.
+        - CVE-2022-0204
+    
+     -- Ray Veldkamp <ray.veldkamp@canonical.com> Fri, 04 Feb 2022 10:25:37 +1100
+    
+    bluez (5.48-0ubuntu3.7) bionic-security; urgency=medium
+    
+      * SECURITY UPDATE: heap-based buffer overflow
+        - debian/patches/CVE-2019-8922.patch: check if there is enough space in
+          lib/sdp.c.
+        - CVE-2019-8922
+    
+     -- Marc Deslauriers <marc.deslauriers@ubuntu.com> Wed, 08 Dec 2021 07:57:30 -0500
+    
+    bluez (5.48-0ubuntu3.6) bionic-security; urgency=medium
+    
+      * SECURITY UPDATE: DoS via memory leak in sdp_cstate_alloc_buf
+        - debian/patches/CVE-2021-41229-pre1.patch: fix not checking if cstate
+          length in src/sdpd-request.c.
+        - debian/patches/CVE-2021-41229.patch: fix leaking buffers stored in
+          cstates cache in src/sdpd-request.c, src/sdpd-server.c, src/sdpd.h,
+          unit/test-sdp.c.
+        - CVE-2021-41229
+      * SECURITY UPDATE: use-after-free when client disconnects
+        - debian/patches/CVE-2021-43400-pre1.patch: send device and link
+          options with AcquireNotify in src/gatt-database.c.
+        - debian/patches/CVE-2021-43400-pre2.patch: fix Acquire* reply handling
+          in src/gatt-database.c.
+        - debian/patches/CVE-2021-43400-pre3.patch: no multiple calls to
+          AcquireWrite in src/gatt-database.c.
+        - debian/patches/CVE-2021-43400-pre4.patch: provide MTU in ReadValue
+          and WriteValue in src/gatt-database.c.
+        - debian/patches/CVE-2021-43400.patch: fix not cleaning up when
+          disconnected in src/gatt-database.c.
+        - CVE-2021-43400
+    
+     -- Marc Deslauriers <marc.deslauriers@ubuntu.com> Wed, 17 Nov 2021 10:52:30 -0500
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/415370
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2021-06-22 bluez 5.48-3
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
