@@ -58,9 +58,6 @@ apps:
   btmgmt:
     command: usr/bin/btmgmt
     plugs: [bluetooth-control, network-control]
-  meshctl:
-    command: usr/bin/meshctl
-    plugs: [bluetooth-control, network-control]
 
 plugs:
   client:
@@ -130,7 +127,6 @@ parts:
       - --disable-silent-rules
       - --enable-test
       - --enable-deprecated
-      - --enable-mesh
     build-packages:
       - flex
       - bison
@@ -156,7 +152,6 @@ parts:
       - usr/bin/sdptool
       - usr/bin/btmon
       - usr/bin/btmgmt
-      - usr/bin/meshctl
     override-build: |
       set -ex
       "$SNAPCRAFT_STAGE"/build-tools/check-versions bluez yes
