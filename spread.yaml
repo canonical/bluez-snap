@@ -22,7 +22,7 @@ environment:
     SNAP_ARCH: amd64
     # Allow the host to pass the channel to use for the test run
     SNAP_CHANNEL: $(HOST:echo $SNAP_CHANNEL)
-    SNAP_AUTO_ALIASES: bluetoothctl obexctl hciconfig hcidump hciattach hcitool
+    SNAP_AUTO_ALIASES: bluetoothctl hciconfig hcidump hciattach hcitool
 
 backends:
     qemu:

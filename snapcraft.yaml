@@ -22,18 +22,11 @@ apps:
   bluetoothctl:
     command: bin/client-wrapper usr/bin/bluetoothctl
     plugs: [client, uhid]
-  obexctl:
-    command: bin/client-wrapper usr/bin/obexctl
-    plugs: [client]
   bluez:
     command: bin/bluetoothd-wrapper
     daemon: simple
     slots: [service]
     plugs: [uhid, uinput, kernel-crypto-api]
-  obex:
-    command: "usr/lib/bluetooth/obexd"
-    daemon: simple
-    slots: [service]
   hciconfig:
     command: usr/bin/hciconfig
     plugs: [bluetooth-control]
@@ -95,7 +88,6 @@ parts:
       - git
     stage-packages:
       - bluez
-      - bluez-obexd
       - bluez-hcidump
     override-build: |
       set -ex
@@ -107,7 +99,6 @@ parts:
       cp build-tools/* "$SNAPCRAFT_PART_INSTALL"/build-tools
     prime:
       - usr/share/doc/bluez
-      - usr/share/doc/bluez-obexd
       - usr/share/doc/bluez-hcidump
 
   bluez:
@@ -122,7 +113,6 @@ parts:
       - --enable-experimental
       - --enable-threads
       - --disable-cups
-      - --enable-obex
       - --disable-systemd
       - --disable-silent-rules
       - --enable-test
@@ -141,9 +131,7 @@ parts:
       - check
     prime:
       - usr/lib/bluetooth/bluetoothd
-      - usr/lib/bluetooth/obexd
       - usr/bin/bluetoothctl
-      - usr/bin/obexctl
       - usr/bin/hciconfig
       - usr/bin/hcidump
       - usr/bin/hciattach
@@ -160,6 +148,5 @@ parts:
       git am "$SNAPCRAFT_PROJECT_DIR"/patch/*
       snapcraftctl build
       cp tools/btmgmt "$SNAPCRAFT_PART_INSTALL"/usr/bin/
-      cp tools/obexctl "$SNAPCRAFT_PART_INSTALL"/usr/bin/
       # Run all tests shiped by default
       #make check
