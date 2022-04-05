@@ -1,5 +1,5 @@
 name: bluez
-version: 5.53-7-dev
+version: 5.64-dev
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -9,8 +9,8 @@ description: |
  License (GPL). See the project homepage for more details:
  https://code.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
 confinement: strict
-grade: stable
-base: core20
+grade: devel
+base: core22
 
 layout:
   /usr/var/lib/bluetooth:
@@ -86,6 +86,7 @@ parts:
     build-packages:
       - dpkg-dev
       - git
+      - python3-docutils
     stage-packages:
       - bluez
       - bluez-hcidump
@@ -106,7 +107,7 @@ parts:
     plugin: autotools
     source: https://git.launchpad.net/ubuntu/+source/bluez
     source-type: git
-    source-branch: applied/ubuntu/focal-updates
+    source-branch: applied/ubuntu/jammy
     autotools-configure-parameters:
       - --prefix=/usr
       - --libexec=/usr/lib/
