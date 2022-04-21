@@ -150,4 +150,4 @@ parts:
       snapcraftctl build
       cp tools/btmgmt "$SNAPCRAFT_PART_INSTALL"/usr/bin/
       # Run all tests shiped by default
-      #make check
+      make check
