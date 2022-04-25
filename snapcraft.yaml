@@ -1,5 +1,5 @@
 name: bluez
-version: 5.53-7-dev
+version: 5.64-dev
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -9,8 +9,8 @@ description: |
  License (GPL). See the project homepage for more details:
  https://code.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
 confinement: strict
-grade: stable
-base: core20
+grade: devel
+base: core22
 
 layout:
   /usr/var/lib/bluetooth:
@@ -22,18 +22,12 @@ apps:
   bluetoothctl:
     command: bin/client-wrapper usr/bin/bluetoothctl
     plugs: [client, uhid]
-  obexctl:
-    command: bin/client-wrapper usr/bin/obexctl
-    plugs: [client]
   bluez:
     command: bin/bluetoothd-wrapper
-    daemon: simple
+    daemon: dbus
+    bus-name: org.bluez
     slots: [service]
     plugs: [uhid, uinput, kernel-crypto-api]
-  obex:
-    command: "usr/lib/bluetooth/obexd"
-    daemon: simple
-    slots: [service]
   hciconfig:
     command: usr/bin/hciconfig
     plugs: [bluetooth-control]
@@ -57,9 +51,6 @@ apps:
     plugs: [bluetooth-control, network-control, home]
   btmgmt:
     command: usr/bin/btmgmt
-    plugs: [bluetooth-control, network-control]
-  meshctl:
-    command: usr/bin/meshctl
     plugs: [bluetooth-control, network-control]
 
 plugs:
@@ -96,9 +87,9 @@ parts:
     build-packages:
       - dpkg-dev
       - git
+      - python3-docutils
     stage-packages:
       - bluez
-      - bluez-obexd
       - bluez-hcidump
     override-build: |
       set -ex
@@ -110,7 +101,6 @@ parts:
       cp build-tools/* "$SNAPCRAFT_PART_INSTALL"/build-tools
     prime:
       - usr/share/doc/bluez
-      - usr/share/doc/bluez-obexd
       - usr/share/doc/bluez-hcidump
 
   bluez:
@@ -118,19 +108,17 @@ parts:
     plugin: autotools
     source: https://git.launchpad.net/ubuntu/+source/bluez
     source-type: git
-    source-branch: applied/ubuntu/focal-updates
+    source-branch: applied/ubuntu/jammy
     autotools-configure-parameters:
       - --prefix=/usr
       - --libexec=/usr/lib/
       - --enable-experimental
       - --enable-threads
       - --disable-cups
-      - --enable-obex
       - --disable-systemd
       - --disable-silent-rules
       - --enable-test
       - --enable-deprecated
-      - --enable-mesh
     build-packages:
       - flex
       - bison
@@ -145,9 +133,7 @@ parts:
       - check
     prime:
       - usr/lib/bluetooth/bluetoothd
-      - usr/lib/bluetooth/obexd
       - usr/bin/bluetoothctl
-      - usr/bin/obexctl
       - usr/bin/hciconfig
       - usr/bin/hcidump
       - usr/bin/hciattach
@@ -156,7 +142,6 @@ parts:
       - usr/bin/sdptool
       - usr/bin/btmon
       - usr/bin/btmgmt
-      - usr/bin/meshctl
     override-build: |
       set -ex
       "$SNAPCRAFT_STAGE"/build-tools/check-versions bluez yes
@@ -165,6 +150,5 @@ parts:
       git am "$SNAPCRAFT_PROJECT_DIR"/patch/*
       snapcraftctl build
       cp tools/btmgmt "$SNAPCRAFT_PART_INSTALL"/usr/bin/
-      cp tools/obexctl "$SNAPCRAFT_PART_INSTALL"/usr/bin/
       # Run all tests shiped by default
-      #make check
+      make check

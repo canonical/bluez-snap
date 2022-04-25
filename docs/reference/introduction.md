@@ -28,6 +28,5 @@ In particular this section will discuss:
 * [Prerequisites](using-prerequisites.html)
 * [Available commands](available-commands.md)
 * [How to pair with remote devices](pairing/introduction.md)
-* [How to send files using OPP](sending-files.md)
 * [Accessing the GATT services](gatt-services.md)
 * [Device Enablement with Bluetooth](enablement/introduction.md)

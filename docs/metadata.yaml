@@ -32,8 +32,6 @@ navigation:
         location: reference/pairing/outbound.md
       - title: Inbound Pairing
         location: reference/pairing/inbound.md
-    - title: Sending Files
-      location: reference/sending-files.md
     - title: Accessing GATT Services
       location: reference/gatt-services.md
     - title: Device Enablement

@@ -16,9 +16,7 @@ table lists the commands that are provided by the *bluez* snap:
 | Command      | Short description                                             |
 |--------------|---------------------------------------------------------------|
 | bluez        | The *bluetoothd* Bluetooth daemon                             |
-| obex         | The *obexd* OBEX daemon                                       |
 | bluetoothctl | A command-line interface to the BlueZ 			       |
-| obexctl      | A command-line interface to the BlueZ for file transfers      |
 | hciconfig    | HCI device configuration utility                              |
 | hcidump      | Reads raw HCI data and prints it on screen                    |
 | hciattach    | Attach a serial UART to the BT stack as a transport interface |
@@ -40,6 +38,6 @@ available commands:
 ```
 $ bluez.
 bluez.bluetoothctl  bluez.hciattach     bluez.hciconfig     bluez.hcidump
-bluez.hcitool       bluez.obexctl       bluez.sdptool       
+bluez.hcitool       bluez.sdptool       
 $ bluez.
 ```
