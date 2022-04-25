@@ -24,7 +24,8 @@ apps:
     plugs: [client, uhid]
   bluez:
     command: bin/bluetoothd-wrapper
-    daemon: simple
+    daemon: dbus
+    bus-name: org.bluez
     slots: [service]
     plugs: [uhid, uinput, kernel-crypto-api]
   hciconfig:
