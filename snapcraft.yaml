@@ -26,7 +26,7 @@ apps:
     command: bin/bluetoothd-wrapper
     daemon: dbus
     bus-name: org.bluez
-    slots: [service]
+    slots: [service, dbus-bluez]
     plugs: [uhid, uinput, kernel-crypto-api]
   hciconfig:
     command: usr/bin/hciconfig
@@ -55,11 +55,15 @@ apps:
 
 plugs:
   client:
-      interface: bluez
+    interface: bluez
 
 slots:
   service:
-      interface: bluez
+    interface: bluez
+  dbus-bluez:
+    interface: dbus
+    bus: system
+    name: org.bluez
 
 parts:
 
