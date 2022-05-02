@@ -9,7 +9,7 @@ description: |
  License (GPL). See the project homepage for more details:
  https://code.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
 confinement: strict
-grade: devel
+grade: stable
 base: core22
 
 layout:
