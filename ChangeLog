@@ -1,3 +1,13 @@
+2022-05-02 bluez 5.64-2
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * Change grade to stable as core22 is now released
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/421056
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2022-04-28 bluez 5.64-1
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
