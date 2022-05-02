@@ -1,9 +1,9 @@
 snapcraft-version: '6.1'
-snapcraft-started-at: '2022-04-28T10:31:39.567286Z'
+snapcraft-started-at: '2022-05-02T21:39:55.623265Z'
 snapcraft-os-release-id: ubuntu
 snapcraft-os-release-version-id: '22.04'
 name: bluez
-version: 5.64-1
+version: 5.64-2
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -13,7 +13,7 @@ description: |
   License (GPL). See the project homepage for more details:
   https://code.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
 confinement: strict
-grade: devel
+grade: stable
 base: core22
 layout:
   /usr/etc/bluetooth:
@@ -208,7 +208,7 @@ parts:
     - libcryptsetup12=2:2.4.3-1ubuntu1
     - libctf-nobfd0=2.38-3ubuntu1
     - libctf0=2.38-3ubuntu1
-    - libcurl3-gnutls=7.81.0-1
+    - libcurl3-gnutls=7.81.0-1ubuntu1.1
     - libdb-dev=1:5.3.21~exp1ubuntu4
     - libdb5.3-dev=5.3.28+dfsg1-0.8ubuntu3
     - libdb5.3=5.3.28+dfsg1-0.8ubuntu3
@@ -413,16 +413,16 @@ parts:
     - zlib1g-dev=1:1.2.11.dfsg-2ubuntu9
     - zlib1g=1:1.2.11.dfsg-2ubuntu9
     installed-snaps:
-    - core20=1408
+    - core20=1437
     - core22=169
     - snapcraft=7205
     - snapd=15541
     override-build: |
       set -ex
-      "/build/ci-bluez-5am7qgnb4p6nwvwv/stage"/build-tools/check-versions bluez yes
+      "/build/ci-bluez-kl5ba0utdctuovit/stage"/build-tools/check-versions bluez yes
       git config user.email "snapcraft@canonical.com"
       git config user.name "snapcraft"
-      git am "/build/ci-bluez-5am7qgnb4p6nwvwv"/patch/*
+      git am "/build/ci-bluez-kl5ba0utdctuovit"/patch/*
       snapcraftctl build
       cp tools/btmgmt "$SNAPCRAFT_PART_INSTALL"/usr/bin/
       # Run all tests shiped by default
@@ -541,7 +541,7 @@ parts:
     - libcryptsetup12=2:2.4.3-1ubuntu1
     - libctf-nobfd0=2.38-3ubuntu1
     - libctf0=2.38-3ubuntu1
-    - libcurl3-gnutls=7.81.0-1
+    - libcurl3-gnutls=7.81.0-1ubuntu1.1
     - libdb-dev=1:5.3.21~exp1ubuntu4
     - libdb5.3-dev=5.3.28+dfsg1-0.8ubuntu3
     - libdb5.3=5.3.28+dfsg1-0.8ubuntu3
@@ -746,7 +746,7 @@ parts:
     - zlib1g-dev=1:1.2.11.dfsg-2ubuntu9
     - zlib1g=1:1.2.11.dfsg-2ubuntu9
     installed-snaps:
-    - core20=1408
+    - core20=1437
     - core22=169
     - snapcraft=7205
     - snapd=15541
@@ -852,7 +852,7 @@ parts:
     - libcryptsetup12=2:2.4.3-1ubuntu1
     - libctf-nobfd0=2.38-3ubuntu1
     - libctf0=2.38-3ubuntu1
-    - libcurl3-gnutls=7.81.0-1
+    - libcurl3-gnutls=7.81.0-1ubuntu1.1
     - libdb-dev=1:5.3.21~exp1ubuntu4
     - libdb5.3-dev=5.3.28+dfsg1-0.8ubuntu3
     - libdb5.3=5.3.28+dfsg1-0.8ubuntu3
@@ -1057,13 +1057,13 @@ parts:
     - zlib1g-dev=1:1.2.11.dfsg-2ubuntu9
     - zlib1g=1:1.2.11.dfsg-2ubuntu9
     installed-snaps:
-    - core20=1408
+    - core20=1437
     - core22=169
     - snapcraft=7205
     - snapd=15541
     organize:
       ChangeLog: snap/ChangeLog
-    override-build: 'cp "/build/ci-bluez-5am7qgnb4p6nwvwv"/ChangeLog "$SNAPCRAFT_PART_INSTALL"
+    override-build: 'cp "/build/ci-bluez-kl5ba0utdctuovit"/ChangeLog "$SNAPCRAFT_PART_INSTALL"
 
 '
     plugin: nil
@@ -1079,7 +1079,7 @@ parts:
     - python3-docutils
     installed-packages: []
     installed-snaps:
-    - core20=1408
+    - core20=1437
     - core22=169
     - snapcraft=7205
     - snapd=15541
@@ -1110,7 +1110,7 @@ parts:
 architectures:
 - arm64
 image-info:
-  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-5am7qgnb4p6nwvwv/+build/1745529
+  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-kl5ba0utdctuovit/+build/1749865
 build-packages:
 - autoconf=2.71-2
 - automake=1:1.16.5-1.3
