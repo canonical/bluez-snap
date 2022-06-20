@@ -1,3 +1,23 @@
+2022-06-20 bluez 5.53-7
+
+  [ Changes in primed packages ]
+  
+  bluez, bluez-hcidump, bluez-obexd (built from bluez) updated from 5.53-0ubuntu3.5 to 5.53-0ubuntu3.6:
+  
+    bluez (5.53-0ubuntu3.6) focal-security; urgency=medium
+  
+      * SECURITY UPDATE: various security improvements (LP: #1977968)
+        - debian/patches/avdtp-security.patch: check if capabilities are valid
+          before attempting to copy them in profiles/audio/avdtp.c.
+        - debian/patches/avdtp-security-2.patch: fix size comparison and
+          variable misassignment in profiles/audio/avdtp.c.
+        - debian/patches/avrcp-security.patch: make sure the number of bytes in
+          the params_len matches the remaining bytes received so the code don't
+          end up accessing invalid memory in profiles/audio/avrcp.c.
+        - No CVE numbers
+  
+     -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 08 Jun 2022 07:09:00 -0400
+  
 2022-02-09 bluez 5.53-6
 
   [ Changes in primed packages ]
