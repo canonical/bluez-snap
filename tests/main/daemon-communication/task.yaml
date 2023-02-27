@@ -1,9 +1,10 @@
 summary: Test bluetoothctl can communicate with the bluez daemon
 
 execute: |
-    . $TESTSLIB/utilities.sh
-    wait_for_bluez
-    /snap/bin/bluetoothctl <<EOF
-    list
-    exit
-    EOF
+  . "$SYSTEMSNAPSTESTLIB"/utilities.sh
+
+  wait_for_systemd_service snap.bluez.bluez
+  /snap/bin/bluetoothctl <<EOF
+  list
+  exit
+  EOF
