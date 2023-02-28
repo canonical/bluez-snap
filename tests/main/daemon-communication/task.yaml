@@ -4,7 +4,7 @@ execute: |
   . "$SYSTEMSNAPSTESTLIB"/utilities.sh
 
   wait_for_systemd_service snap.bluez.bluez
-  /snap/bin/bluetoothctl <<EOF
+  bluez.bluetoothctl <<EOF
   list
   exit
   EOF
