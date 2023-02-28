@@ -1,3 +1,17 @@
+2023-02-28 bluez 5.64-3
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * Port recipe to snapcraft 7
+    Merge-Proposal: https://code.launchpad.net/~alfonsosanchezbeato/snappy-hwe-snaps/+git/bluez/+merge/424724
+
+  [ alfonsosanchezbeato <alfonso.sanchez-beato@canonical.com> ]
+  * many: changes to run tests in github
+    Merge pull request #1 from snapcore/github-integration-22
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2022-05-02 bluez 5.64-2
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
