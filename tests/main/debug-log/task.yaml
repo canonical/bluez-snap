@@ -1,20 +1,20 @@
 summary: Verify that the debug traces can be enabled/disabled
 
 execute: |
-    . $TESTSLIB/utilities.sh
+  . "$SYSTEMSNAPSTESTLIB"/utilities.sh
 
-    state=$(snap get bluez debug.enable)
-    test "$state" = false
-    pgrep --full "bluetoothd -E$"
+  state=$(snap get bluez debug.enable)
+  test "$state" = false
+  pgrep --full "bluetoothd -E$"
 
-    snap set bluez debug.enable=true
-    state=$(snap get bluez debug.enable)
-    test "$state" = true
-    snap restart bluez
-    pgrep --full "bluetoothd -E -d$"
+  snap set bluez debug.enable=true
+  state=$(snap get bluez debug.enable)
+  test "$state" = true
+  snap restart bluez
+  pgrep --full "bluetoothd -E -d$"
 
-    snap set bluez debug.enable=false
-    state=$(snap get bluez debug.enable)
-    test "$state" = false
-    snap restart bluez
-    pgrep --full "bluetoothd -E$"
+  snap set bluez debug.enable=false
+  state=$(snap get bluez debug.enable)
+  test "$state" = false
+  snap restart bluez
+  pgrep --full "bluetoothd -E$"

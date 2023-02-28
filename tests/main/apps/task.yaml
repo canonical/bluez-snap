@@ -1,0 +1,10 @@
+summary: Verify all apps exist
+
+execute: |
+  . "$SYSTEMSNAPSTESTLIB"/utilities.sh
+
+  test -e /snap/bin/bluez.bluetoothctl
+  test -e /snap/bin/bluez.hciconfig
+  test -e /snap/bin/bluez.hcidump
+  test -e /snap/bin/bluez.hciattach
+  test -e /snap/bin/bluez.hcitool
