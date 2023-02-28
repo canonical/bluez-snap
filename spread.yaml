@@ -85,7 +85,7 @@ prepare: |
   "$SYSTEMSNAPSTESTLIB"/prepare.sh
 
 prepare-each: |
-  "$SYSTEMSNAPSTESTLIB"/prepare-each.sh "$SNAP_NAME"
+  "$SYSTEMSNAPSTESTLIB"/prepare-each.sh "$SNAP_NAME" 22/stable
 
 restore-each: |
   "$SYSTEMSNAPSTESTLIB"/restore-each.sh
