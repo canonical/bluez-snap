@@ -123,6 +123,8 @@ parts:
       - --disable-silent-rules
       - --enable-test
       - --enable-deprecated
+      # Set explicitly flags until lp: #1791946 is solved
+      - CFLAGS='-O2 -Wl,-z,relro,-z,now -pie -fpie'
     build-packages:
       - flex
       - bison
