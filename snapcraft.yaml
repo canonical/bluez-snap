@@ -154,5 +154,8 @@ parts:
       git am "$CRAFT_PROJECT_DIR"/patch/*
       craftctl default
       cp tools/btmgmt "$CRAFT_PART_INSTALL"/usr/bin/
+      # Strip binaries
+      find "$CRAFT_PART_INSTALL"/ -executable -type f | xargs file -Ni |
+          grep 'application/x-.*executable\|application/x-.*sharedlib' | cut -d: -f1 | xargs strip
       # Run all tests shiped by default
       make check
