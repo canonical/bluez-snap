@@ -131,6 +131,8 @@ parts:
       - --enable-test
       - --enable-deprecated
       - --enable-mesh
+      # Set explicitly CFLAGS until lp: #1791946 is solved
+      - CFLAGS='-O2 -Wl,-z,relro,-z,now -pie -fpie'
     build-packages:
       - flex
       - bison
