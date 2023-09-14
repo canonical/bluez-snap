@@ -1,3 +1,15 @@
+2023-09-14 bluez 5.53-8
+
+  [ alfonsosanchezbeato <alfonso.sanchez-beato@canonical.com> ]
+  * Adapt CI/CD to github actions
+    Merge pull request #2 from snapcore/github-integration-20
+  * snapcraft.yaml: some clean-ups
+    Merge pull request #5 from snapcore/cleanups-20
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2022-06-20 bluez 5.53-7
 
   [ Changes in primed packages ]
