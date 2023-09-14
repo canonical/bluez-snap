@@ -131,6 +131,8 @@ parts:
       - --enable-test
       - --enable-deprecated
       - --enable-mesh
+      # Set explicitly CFLAGS until lp: #1791946 is solved
+      - CFLAGS='-O2 -Wl,-z,relro,-z,now -pie -fpie'
     build-packages:
       - flex
       - bison
@@ -168,3 +170,6 @@ parts:
       cp tools/obexctl "$SNAPCRAFT_PART_INSTALL"/usr/bin/
       # Run all tests shiped by default
       #make check
+      # Strip binaries
+      find "$SNAPCRAFT_PART_INSTALL"/ -executable -type f | xargs file -Ni |
+          grep 'application/x-.*executable\|application/x-.*sharedlib' | cut -d: -f1 | xargs strip
