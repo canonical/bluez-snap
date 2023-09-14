@@ -1,3 +1,13 @@
+2023-09-14 bluez 5.64-4
+
+  [ alfonsosanchezbeato <alfonso.sanchez-beato@canonical.com> ]
+  * snapcraft.yaml: some clean-ups
+    Merge pull request #6 from snapcore/cleanups-22
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2023-02-28 bluez 5.64-3
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
