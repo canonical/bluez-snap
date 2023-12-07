@@ -112,7 +112,7 @@ parts:
     plugin: autotools
     source: https://git.launchpad.net/ubuntu/+source/bluez
     source-type: git
-    source-branch: applied/ubuntu/jammy
+    source-branch: applied/ubuntu/jammy-updates
     autotools-configure-parameters:
       - --prefix=/usr
       - --libexec=/usr/lib/
