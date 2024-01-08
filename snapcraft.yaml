@@ -36,10 +36,10 @@ apps:
     plugs: [bluetooth-control, network-control, home]
   hciattach:
     command: usr/bin/hciattach
-    plugs: [bluetooth-control]
+    plugs: [bluetooth-control, serial-port]
   btattach:
     command: usr/bin/btattach
-    plugs: [bluetooth-control]
+    plugs: [bluetooth-control, serial-port]
   hcitool:
     command: usr/bin/hcitool
     plugs: [bluetooth-control]
