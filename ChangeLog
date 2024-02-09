@@ -1,3 +1,24 @@
+2024-02-09 bluez 5.64-5
+
+  [ alfonsosanchezbeato <alfonso.sanchez-beato@canonical.com> ]
+  * Enable riscv64 builds
+    Merge pull request #7 from snapcore/riscv-support
+  * snap: add serial-port plug to hciattach and btattach
+    Merge pull request #9 from bboozzoo/bboozzoo/hciattach-add-serial-port
+
+  [ Changes in primed packages ]
+  
+  bluez, bluez-hcidump (built from bluez) updated from 5.64-0ubuntu1 to 5.64-0ubuntu1.1:
+  
+    bluez (5.64-0ubuntu1.1) jammy-security; urgency=medium
+  
+      * SECURITY UPDATE: make conf compliant to HID specification
+        - debian/patches/CVE-2023-45866.patch: input.conf: Change default of
+          ClassicBondedOnly
+        - CVE-2023-45866
+  
+     -- Nishit Majithia <nishit.majithia@canonical.com>  Wed, 29 Nov 2023 17:01:28 +0530
+  
 2023-09-14 bluez 5.64-4
 
   [ alfonsosanchezbeato <alfonso.sanchez-beato@canonical.com> ]
