@@ -1,5 +1,5 @@
 snapcraft-version: 8.0.2
-snapcraft-started-at: '2024-02-09T12:20:03.796733Z'
+snapcraft-started-at: '2024-02-09T12:46:06.927136Z'
 snapcraft-os-release-id: ubuntu
 snapcraft-os-release-version-id: '22.04'
 name: bluez
@@ -172,9 +172,9 @@ parts:
     stage-packages: []
     stage: []
 architectures:
-- arm64
+- riscv64
 image-info:
-  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-i9dbd0l9ieioki24/+build/2386544
+  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-i9dbd0l9ieioki24/+build/2386545
 build-packages: []
 build-snaps: []
 primed-stage-packages:

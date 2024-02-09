@@ -1,9 +1,9 @@
-snapcraft-version: 7.5.2
-snapcraft-started-at: '2023-09-14T18:16:41.141916Z'
+snapcraft-version: 8.0.2
+snapcraft-started-at: '2024-02-09T12:19:18.023680Z'
 snapcraft-os-release-id: ubuntu
 snapcraft-os-release-version-id: '22.04'
 name: bluez
-version: 5.64-4
+version: 5.64-5
 summary: Bluetooth tools and daemons
 description: |
   This package contains tools and system daemons for using Bluetooth
@@ -45,10 +45,12 @@ apps:
     command: usr/bin/hciattach
     plugs:
     - bluetooth-control
+    - serial-port
   btattach:
     command: usr/bin/btattach
     plugs:
     - bluetooth-control
+    - serial-port
   hcitool:
     command: usr/bin/hcitool
     plugs:
@@ -81,7 +83,7 @@ parts:
     build-packages: []
   changelog:
     plugin: nil
-    override-build: 'cp "/build/ci-bluez-1dlt3aza7ozsu1zy"/ChangeLog "$CRAFT_PART_INSTALL"
+    override-build: 'cp "/build/ci-bluez-i9dbd0l9ieioki24"/ChangeLog "$CRAFT_PART_INSTALL"
 
       '
     organize:
@@ -99,8 +101,8 @@ parts:
     - git
     - python3-docutils
     stage-packages:
-    - bluez-hcidump=5.64-0ubuntu1
-    - bluez=5.64-0ubuntu1
+    - bluez-hcidump=5.64-0ubuntu1.1
+    - bluez=5.64-0ubuntu1.1
     override-build: |
       set -ex
       find "$CRAFT_PART_INSTALL"/ -type f,l \
@@ -119,7 +121,7 @@ parts:
     plugin: autotools
     source: https://git.launchpad.net/ubuntu/+source/bluez
     source-type: git
-    source-branch: applied/ubuntu/jammy
+    source-branch: applied/ubuntu/jammy-updates
     autotools-configure-parameters:
     - --prefix=/usr
     - --libexec=/usr/lib/
@@ -156,10 +158,10 @@ parts:
     - usr/bin/btmgmt
     override-build: |
       set -ex
-      "/build/ci-bluez-1dlt3aza7ozsu1zy/stage"/build-tools/check-versions bluez yes
+      "/build/ci-bluez-i9dbd0l9ieioki24/stage"/build-tools/check-versions bluez yes
       git config user.email "snapcraft@canonical.com"
       git config user.name "snapcraft"
-      git am "/build/ci-bluez-1dlt3aza7ozsu1zy"/patch/*
+      git am "/build/ci-bluez-i9dbd0l9ieioki24"/patch/*
       craftctl default
       cp tools/btmgmt "$CRAFT_PART_INSTALL"/usr/bin/
       # Strip binaries
@@ -172,9 +174,9 @@ parts:
 architectures:
 - amd64
 image-info:
-  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-1dlt3aza7ozsu1zy/+build/2230443
+  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-i9dbd0l9ieioki24/+build/2386542
 build-packages: []
 build-snaps: []
 primed-stage-packages:
-- bluez-hcidump=5.64-0ubuntu1
-- bluez=5.64-0ubuntu1
+- bluez-hcidump=5.64-0ubuntu1.1
+- bluez=5.64-0ubuntu1.1
