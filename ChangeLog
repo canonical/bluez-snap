@@ -1,3 +1,18 @@
+2024-02-22 bluez 5.53-9
+
+  [ Changes in primed packages ]
+  
+  bluez, bluez-hcidump, bluez-obexd (built from bluez) updated from 5.53-0ubuntu3.6 to 5.53-0ubuntu3.7:
+  
+    bluez (5.53-0ubuntu3.7) focal-security; urgency=medium
+  
+      * SECURITY UPDATE: make conf compliant to HID specification
+        - debian/patches/CVE-2023-45866.patch: input.conf: Change default of
+          ClassicBondedOnly
+        - CVE-2023-45866
+  
+     -- Nishit Majithia <nishit.majithia@canonical.com>  Wed, 29 Nov 2023 14:41:45 +0530
+  
 2023-09-14 bluez 5.53-8
 
   [ alfonsosanchezbeato <alfonso.sanchez-beato@canonical.com> ]
