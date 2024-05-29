@@ -1,5 +1,5 @@
 name: bluez
-version: 5.72-0ubuntu1
+version: 5.72-0ubuntu5
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -9,8 +9,7 @@ description: |
  License (GPL). See the project homepage for more details:
  https://code.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
 confinement: strict
-grade: devel
-build-base: devel
+grade: stable
 base: core24
 
 layout:
@@ -113,7 +112,7 @@ parts:
     plugin: autotools
     source: https://git.launchpad.net/ubuntu/+source/bluez
     source-type: git
-    source-branch: applied/ubuntu/noble-proposed
+    source-branch: applied/ubuntu/noble
     autotools-configure-parameters:
       - --prefix=/usr
       - --libexec=/usr/lib/

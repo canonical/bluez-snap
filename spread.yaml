@@ -44,17 +44,17 @@ backends:
     plan: n2-standard-2
     halt-timeout: 2h
     systems:
-      - ubuntu-core-22-64:
-          image: ubuntu-22.04-64
+      - ubuntu-core-24-64:
+          image: ubuntu-24.04-64
           workers: 8
           storage: 20G
     prepare: |
-      # Builds UC image on top of classic 22.04
+      # Builds UC image on top of classic 24.04
       "$TESTSLIB"/prepare-restore.sh --prepare-suite
   qemu:
     memory: 4G
     systems:
-      - ubuntu-core-22:
+      - ubuntu-core-24:
           # TODO how is this done in snapd spread?
           #bios: /usr/share/OVMF/OVMF_CODE.fd
           username: test
@@ -67,6 +67,11 @@ exclude:
   - .git
 
 prepare: |
+  # When running this through other means than GH actions, ensure that
+  # the repo is checked out
+  if ! [ -d /home/bluez/cicd ]; then
+    git clone https://github.com/snapcore/system-snaps-cicd-tools.git /home/bluez/cicd
+  fi
   # Take the MATCH and REBOOT functions from spread and allow our shell
   # scripts to use them as shell commands. The replacements are real
   # executables in cicd/snapd-lib/bin (which is on PATH) but they source
@@ -85,7 +90,7 @@ prepare: |
   "$SYSTEMSNAPSTESTLIB"/prepare.sh
 
 prepare-each: |
-  "$SYSTEMSNAPSTESTLIB"/prepare-each.sh "$SNAP_NAME" 22/stable
+  "$SYSTEMSNAPSTESTLIB"/prepare-each.sh "$SNAP_NAME" 24/stable
 
 restore-each: |
   "$SYSTEMSNAPSTESTLIB"/restore-each.sh
