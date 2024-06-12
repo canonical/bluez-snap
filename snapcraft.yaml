@@ -1,5 +1,5 @@
 name: bluez
-version: 5.72-0ubuntu5
+version: 5.72-1-dev
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -7,7 +7,7 @@ description: |
  devices. BlueZ is the official Linux Bluetooth protocol stack. It
  is an Open Source project distributed under GNU General Public
  License (GPL). See the project homepage for more details:
- https://code.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez
+ https://github.com/snapcore/bluez-snap/tree/snap-24
 confinement: strict
 grade: stable
 base: core24
