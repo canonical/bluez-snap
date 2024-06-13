@@ -1,9 +1,9 @@
-snapcraft-version: 8.0.2
-snapcraft-started-at: '2024-02-09T12:23:06.564987Z'
+snapcraft-version: 8.2.10
+snapcraft-started-at: '2024-06-13T14:06:41.936653Z'
 snapcraft-os-release-id: ubuntu
 snapcraft-os-release-version-id: '22.04'
 name: bluez
-version: 5.64-5
+version: 5.64-6
 summary: Bluetooth tools and daemons
 description: |
   This package contains tools and system daemons for using Bluetooth
@@ -83,7 +83,7 @@ parts:
     build-packages: []
   changelog:
     plugin: nil
-    override-build: 'cp "/build/ci-bluez-i9dbd0l9ieioki24"/ChangeLog "$CRAFT_PART_INSTALL"
+    override-build: 'cp "/build/ci-bluez-ekvnada0c4ay2fyk"/ChangeLog "$CRAFT_PART_INSTALL"
 
       '
     organize:
@@ -101,8 +101,8 @@ parts:
     - git
     - python3-docutils
     stage-packages:
-    - bluez-hcidump=5.64-0ubuntu1.1
-    - bluez=5.64-0ubuntu1.1
+    - bluez-hcidump=5.64-0ubuntu1.3
+    - bluez=5.64-0ubuntu1.3
     override-build: |
       set -ex
       find "$CRAFT_PART_INSTALL"/ -type f,l \
@@ -158,10 +158,10 @@ parts:
     - usr/bin/btmgmt
     override-build: |
       set -ex
-      "/build/ci-bluez-i9dbd0l9ieioki24/stage"/build-tools/check-versions bluez yes
+      "/build/ci-bluez-ekvnada0c4ay2fyk/stage"/build-tools/check-versions bluez yes
       git config user.email "snapcraft@canonical.com"
       git config user.name "snapcraft"
-      git am "/build/ci-bluez-i9dbd0l9ieioki24"/patch/*
+      git am "/build/ci-bluez-ekvnada0c4ay2fyk"/patch/*
       craftctl default
       cp tools/btmgmt "$CRAFT_PART_INSTALL"/usr/bin/
       # Strip binaries
@@ -174,9 +174,9 @@ parts:
 architectures:
 - armhf
 image-info:
-  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-i9dbd0l9ieioki24/+build/2386543
+  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-ekvnada0c4ay2fyk/+build/2512027
 build-packages: []
 build-snaps: []
 primed-stage-packages:
-- bluez-hcidump=5.64-0ubuntu1.1
-- bluez=5.64-0ubuntu1.1
+- bluez-hcidump=5.64-0ubuntu1.3
+- bluez=5.64-0ubuntu1.3
