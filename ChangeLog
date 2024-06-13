@@ -1,3 +1,22 @@
+2024-06-13 bluez 5.64-6
+
+  [ Changes in primed packages ]
+  
+  bluez, bluez-hcidump (built from bluez) updated from 5.64-0ubuntu1.1 to 5.64-0ubuntu1.3:
+  
+    bluez (5.64-0ubuntu1.3) jammy-security; urgency=medium
+  
+      * SECURITY UPDATE: null pointer dereference
+        - debian/patches/CVE-2022-3563.patch: Fix null dereference in
+          mgmt-tester.c.
+        - CVE-2022-3563
+      * SECURITY UPDATE: out-of-bounds write
+        - debian/patches/CVE-2023-27349.patch: Fix crash while handling
+          unsupported events in avrcp.c.
+        - CVE-2023-27349
+  
+     -- Fabian Toepfer <fabian.toepfer@canonical.com>  Wed, 05 Jun 2024 12:10:29 +0200
+  
 2024-02-09 bluez 5.64-5
 
   [ alfonsosanchezbeato <alfonso.sanchez-beato@canonical.com> ]
