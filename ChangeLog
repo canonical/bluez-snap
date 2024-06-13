@@ -1,3 +1,200 @@
+2024-06-13 bluez 5.72-1
+
+  [ Philip Meulengracht <the_meulengracht@hotmail.com> ]
+  * snap-24: initial update to noble build
+    Merge pull request #11 from Meulengracht/snap-24
+
+  [ Changes in primed packages ]
+  
+  bluez, bluez-hcidump (built from bluez) updated from 5.64-0ubuntu1.1 to 5.72-0ubuntu5:
+  
+    bluez (5.72-0ubuntu5) noble; urgency=medium
+  
+      * No-change rebuild against libasound2t64
+  
+     -- Steve Langasek <steve.langasek@ubuntu.com>  Sun, 07 Apr 2024 07:10:25 +0000
+  
+    bluez (5.72-0ubuntu4) noble; urgency=medium
+  
+      * No-change rebuild for CVE-2024-3094
+  
+     -- Steve Langasek <steve.langasek@ubuntu.com>  Sun, 31 Mar 2024 07:28:49 +0000
+  
+    bluez (5.72-0ubuntu3) noble; urgency=medium
+  
+      * No-change rebuild against libglib2.0-0t64
+  
+     -- Steve Langasek <steve.langasek@ubuntu.com>  Mon, 11 Mar 2024 22:04:41 +0000
+  
+    bluez (5.72-0ubuntu2) noble; urgency=medium
+  
+      * No-change rebuild against libglib2.0-0t64
+  
+     -- Steve Langasek <steve.langasek@ubuntu.com>  Fri, 08 Mar 2024 03:56:51 +0000
+  
+    bluez (5.72-0ubuntu1) noble; urgency=medium
+  
+      * New upstream release 5.72 (LP: #2049352):
+        - Fix issue with BAP and handling stream IO linking.
+        - Fix issue with BAP and setup of multiple streams per endpoint.
+        - Fix issue with AVDTP and potential incorrect transaction label.
+        - Fix issue with A2DP and handling crash on suspend.
+        - Fix issue with GATT database and an invalid pointer.
+        - Add support for AICS service.
+      * Add bluetoothctl.1 man page to bluez package.
+  
+     -- Daniel van Vugt <daniel.van.vugt@canonical.com>  Tue, 16 Jan 2024 15:15:23 +0800
+  
+    bluez (5.71-1ubuntu3) noble; urgency=medium
+  
+      * Merge from Debian unstable. Remaining changes:
+      * Add Ubuntu patches
+        - lp1759836.patch
+        - 0002-hostname-handle-chassis-type-handset.patch
+        - ubuntu_error_restart.patch
+        - raspi-bcm43xx-load-firmware.patch
+        - raspi-bcm43xx-3wire.patch
+        - raspi-cypress-305-bdaddr.patch
+      * Tweak Debian patches
+        - work-around-Logitech-diNovo-Edge-keyboard-firmware-i.patch
+          Update patch (Closes: #1060393)
+        - Change-shebang-from-usr-bin-python-to-usr-bin-python.patch
+          Update patch to cope with different tarball
+      * Add testsuite (Closes: #1060395)
+      * Enable usb and phonebook-ebook support
+      * Break/Replace old bluez-tests, due to binary renaming
+      * rm conffiles in postrm and preinst
+      * Install source_bluez.py
+      * Disable bluetooth service by default in init script
+  
+     -- Gianfranco Costamagna <locutusofborg@debian.org>  Fri, 12 Jan 2024 18:16:54 +0100
+  
+    bluez (5.71-1ubuntu2) noble; urgency=medium
+  
+      * Do not install several files for bluez-test-tools, our tarballs are
+        different.
+  
+     -- Simon Quigley <tsimonq2@ubuntu.com>  Wed, 10 Jan 2024 20:36:41 -0600
+  
+    bluez (5.71-1ubuntu1) noble; urgency=medium
+  
+      [ Gianfranco Costamagna ]
+      * Merge from sid (LP: #2047780)
+  
+      [ Simon Quigley ]
+      * Remove libell-dev and check from build dependencies (and the corresponding
+        build flags.) These are not in Main.
+  
+     -- Simon Quigley <tsimonq2@ubuntu.com>  Wed, 10 Jan 2024 18:36:31 -0600
+  
+    bluez (5.71-1) unstable; urgency=medium
+  
+      * Update to 5.71.
+      * d/patches: Drop input.conf-Change-default-of-ClassicBondedOnly.patch.
+      * Update d/bluez.manpages.
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Wed, 03 Jan 2024 02:43:51 +0900
+  
+    bluez (5.70-1.1) unstable; urgency=medium
+  
+      * Non-maintainer upload.
+      * Upload to unstable.
+  
+     -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 15 Dec 2023 20:57:14 +0100
+  
+    bluez (5.70-1.1~exp0) experimental; urgency=medium
+  
+      * Non-maintainer upload.
+  
+      [ Helmut Grohne ]
+      * Fix FTBFS when systemd.pc changes systemdsystemunitdir (Closes: #1052983)
+  
+      [ Chris Hofstaedtler ]
+      * Defer udev file placement to udev's pkg-config data (Closes: #1056996)
+      * Install hciconfig into /usr/bin instead of /bin
+  
+      [ Salvatore Bonaccorso ]
+      * input.conf: Change default of ClassicBondedOnly (CVE-2023-45866)
+        (Closes: #1057914)
+  
+     -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 14 Dec 2023 22:32:44 +0100
+  
+    bluez (5.70-1) unstable; urgency=medium
+  
+      * Update to 5.70.
+      * d/clean: Add debian/tmp-source. (Closes: #1044111)
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Tue, 24 Oct 2023 15:17:00 +0900
+  
+    bluez (5.69-1) unstable; urgency=medium
+  
+      * Update to 5.69.
+      * Update d/patches/Fix-typo.patch.
+      * Update d/bluez.manpages.
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Mon, 28 Aug 2023 09:38:44 +0900
+  
+    bluez (5.68-2) unstable; urgency=medium
+  
+      * d/rules: export DEB_CFLAGS_MAINT_APPEND
+      * d/patches: Add Add-HCI_TO_STR-macro-for-FIRMWARE_DIR.patch (Closes: #1036546)
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Sun, 06 Aug 2023 08:42:46 +0900
+  
+    bluez (5.68-1) unstable; urgency=medium
+  
+      * Update to 5.68.
+      * d/patches/obex-Use-GLib-helper-function-to-manipulate-paths.patch: Update.
+      * d/control: Drop lsb-base from Depends of bluez.
+      * Update d/patches/Fix-typo.patch.
+      * Install dbus policy in /usr instead of /etc.
+      * d/control: Remove unnecessary Conflicts and Replace.
+      * d/NEWS: Remove it.
+      * d/rules: Override FIRMWARE_DIR to /lib/firmware. (Closes: #1036546)
+        Thanks to undef <debian@undef.tools>.
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Sun, 06 Aug 2023 07:02:04 +0900
+  
+    bluez (5.66-1) unstable; urgency=medium
+  
+      * Update to 5.66.
+      * Refresh d/patches/Fix-typo.patch.
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Thu, 17 Nov 2022 03:44:23 +0900
+  
+    bluez (5.65-1) unstable; urgency=medium
+  
+      * Update to 5.65.
+      * Update d/rules
+        - Add optimize=+lto.
+      * Refresh d/patches/main.conf.patch.
+      * Add isotest to bluez-test-tools.
+      * Update d/libbluetooth3.symbols (Closes: #1015361)
+      * Add d/upstream/metadata
+      * Update d/control
+        - Bumped Standards-Version to 4.6.1
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Wed, 03 Aug 2022 10:57:23 +0900
+  
+    bluez (5.64-2) unstable; urgency=medium
+  
+      * Create /var/lib/bluetooth (Closes: #1009987)
+        Add d/bluez.prerm d/bluez.preinst.
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Fri, 22 Apr 2022 21:18:22 +0900
+  
+    bluez (5.64-1) unstable; urgency=medium
+  
+      * Update to 5.64.
+        Fixed CVE-2022-0204 (Closes: #1003712)
+      * Update d/control.
+        + bluez; depend on default-dbus-system-bus | dbus-system-bus | dbus.
+      * Drop d/patches/sdpd-Fix-leaking-buffers-stored-in-cstates-cache.patch.
+      * Update d/copyright
+        + Drop nonexistent files.
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Thu, 07 Apr 2022 06:35:07 +0900
+  
 2024-02-09 bluez 5.64-5
 
   [ alfonsosanchezbeato <alfonso.sanchez-beato@canonical.com> ]
