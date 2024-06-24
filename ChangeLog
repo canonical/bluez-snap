@@ -1,3 +1,18 @@
+2024-06-24 bluez 5.53-10
+
+  [ Changes in primed packages ]
+  
+  bluez, bluez-hcidump, bluez-obexd (built from bluez) updated from 5.53-0ubuntu3.7 to 5.53-0ubuntu3.8:
+  
+    bluez (5.53-0ubuntu3.8) focal-security; urgency=medium
+  
+      * SECURITY UPDATE: out-of-bounds write
+        - debian/patches/CVE-2023-27349.patch: Fix crash while handling
+          unsupported events in avrcp.c.
+        - CVE-2023-27349
+  
+     -- Fabian Toepfer <fabian.toepfer@canonical.com>  Wed, 05 Jun 2024 12:10:45 +0200
+  
 2024-02-22 bluez 5.53-9
 
   [ Changes in primed packages ]
