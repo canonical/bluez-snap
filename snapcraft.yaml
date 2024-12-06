@@ -112,7 +112,7 @@ parts:
     plugin: autotools
     source: https://git.launchpad.net/ubuntu/+source/bluez
     source-type: git
-    source-branch: applied/ubuntu/noble
+    source-branch: applied/ubuntu/noble-updates
     autotools-configure-parameters:
       - --prefix=/usr
       - --libexec=/usr/lib/
