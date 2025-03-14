@@ -1,3 +1,19 @@
+2025-03-14 bluez 5.64-7
+
+  [ Changes in primed packages ]
+  
+  bluez, bluez-hcidump (built from bluez) updated from 5.64-0ubuntu1.3 to 5.64-0ubuntu1.4:
+  
+    bluez (5.64-0ubuntu1.4) jammy-security; urgency=medium
+  
+      * SECURITY UPDATE: code exec via Phone Book Access Profile
+        - debian/patches/CVE-2023-502xx.patch: fix not checking counter length
+          in obexd/client/pbap.c.
+        - CVE-2023-50229
+        - CVE-2023-50230
+  
+     -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Tue, 21 Jan 2025 08:12:00 -0500
+  
 2024-06-13 bluez 5.64-6
 
   [ Changes in primed packages ]
