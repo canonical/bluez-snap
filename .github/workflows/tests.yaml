@@ -1,0 +1,13 @@
+name: Spread tests
+
+on: pull_request
+
+jobs:
+  build:
+    # self-hosted runner so we can access gce from external repos
+    runs-on: self-hosted
+    steps:
+      - name: Build and test
+        env:
+          LP_CREDENTIALS: ${{ secrets.LP_CREDENTIALS }}
+        uses: snapcore/system-snaps-cicd-tools/action-test@main

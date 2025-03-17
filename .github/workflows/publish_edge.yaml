@@ -1,0 +1,15 @@
+name: Publish to edge
+
+on: push
+
+jobs:
+  build:
+    # self-hosted runner so we can access launchpad
+    runs-on: self-hosted
+    environment: store
+    steps:
+      - name: Publish to edge
+        env:
+          LP_CREDENTIALS: ${{ secrets.LP_CREDENTIALS }}
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+        uses: snapcore/system-snaps-cicd-tools/action-publish-edge@main
