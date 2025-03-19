@@ -1,3 +1,45 @@
+2025-03-19 bluez 5.48-5
+
+  [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
+  * Update to 5.48-0ubuntu3.9+esm1 sources:
+
+    bluez (5.48-0ubuntu3.9+esm2) bionic-security; urgency=medium
+    
+      * SECURITY UPDATE: out-of-bounds write
+        - debian/patches/CVE-2023-27349.patch: Fix crash while handling
+          unsupported events in avrcp.c.
+        - CVE-2023-27349
+    
+     -- Fabian Toepfer <fabian.toepfer@canonical.com>  Wed, 05 Jun 2024 12:11:05 +0200
+    
+    bluez (5.48-0ubuntu3.9+esm1) bionic-security; urgency=medium
+    
+      * SECURITY UPDATE: make conf compliant to HID specification
+        - debian/patches/CVE-2023-45866.patch: input.conf: Change default of
+          ClassicBondedOnly
+        - CVE-2023-45866
+    
+     -- Nishit Majithia <nishit.majithia@canonical.com>  Wed, 29 Nov 2023 14:42:25 +0530
+    
+    bluez (5.48-0ubuntu3.9) bionic-security; urgency=medium
+    
+      * SECURITY UPDATE: various security improvements (LP: #1977968)
+        - debian/patches/avdtp-security.patch: check if capabilities are valid
+          before attempting to copy them in profiles/audio/avdtp.c.
+        - debian/patches/avdtp-security-2.patch: fix size comparison and
+          variable misassignment in profiles/audio/avdtp.c.
+        - debian/patches/avrcp-security.patch: make sure the number of bytes in
+          the params_len matches the remaining bytes received so the code don't
+          end up accessing invalid memory in profiles/audio/avrcp.c.
+        - No CVE numbers
+    
+     -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 08 Jun 2022 07:19:20 -0400
+    Merge-Proposal: https://code.launchpad.net/~snappy-hwe-team/snappy-hwe-snaps/+git/bluez/+merge/482914
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2022-02-10 bluez 5.48-4
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
