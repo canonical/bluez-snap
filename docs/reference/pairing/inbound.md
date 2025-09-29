@@ -11,7 +11,7 @@ Ubuntu Core device has to make sure of is to be discoverable and pairable, as
 this will allow the remote device to discover and initiate a connection with it.
 
 ```
-$ bluetoothctl
+$ sudo bluetoothctl
 [bluetooth]# discoverable on
 Changing discoverable on succeeded
 [bluetooth]# pairable on
@@ -23,7 +23,7 @@ It is important to register the pairing agent so that the authentication process
 can be completed. Type:
 
 ```
-$ bluetoothctl
+$ sudo bluetoothctl
 [bluetooth]# agent on
 Agent registered
 [bluetooth]# default-agent 

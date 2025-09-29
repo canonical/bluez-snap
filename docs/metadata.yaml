@@ -18,8 +18,6 @@ navigation:
     children:
     - title: Introduction
       location: reference/introduction.md
-    - title: Prerequisites
-      location: reference/using-prerequisites.md
     - title: Commands
       location: reference/available-commands.md
     - title: DBus API
@@ -34,16 +32,6 @@ navigation:
         location: reference/pairing/inbound.md
     - title: Accessing GATT Services
       location: reference/gatt-services.md
-    - title: Device Enablement
-      children:
-      - title: Introduction
-        location: reference/enablement/introduction.md
-      - title: Supported Linux Kernels
-        location: reference/enablement/supported-kernels.md
-      - title: Linux kernel configuration options
-        location: reference/enablement/kernel-configuration-options.md
-      - title: Snapping a Bluetooth Application
-        location: reference/enablement/snapping-bluetooth-enabled-application.md
 
   - title: Troubleshoot
     children:
