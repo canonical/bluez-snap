@@ -5,7 +5,7 @@ table_of_contents: False
 
 # Report a Bug
 
-Bugs can be reported [here](https://bugs.launchpad.net/snappy-hwe-snaps/+filebug).
+Bugs can be reported [as github issues](https://github.com/canonical/bluez-snap/issues).
 
 ## Information Required to Include in a Bug Report
 
@@ -17,7 +17,6 @@ Moreover please include the following information:
 
  * Bluetooth adapter information
  * List of paired devices
- * State of the Bluetooth kill-switch
  * The HCI trace
 
 ### Bluetooth Adapter Information
@@ -29,20 +28,11 @@ $ sudo hciconfig -a
 ### List of Paired Devices
 
 ```
-$ bluetoothctl
+$ sudo bluetoothctl
 [bluetooth]# show
 [bluetooth]# devices
 [bluetooth]# info <mac addr of any device you have problems with>
 ```
-
-### State of the Bluetooth kill-switch
-
-```
-$ snap install wireless-tools
-$ sudo wireless-tools.rfkill list
-```
-
-Note that the *rfkill* command is a part of *wireless-tools* snap.
 
 ### The HCI Trace
 
@@ -58,34 +48,23 @@ events between the stack and the chip. It is possible however to make it save
 the data in the [snoop format](https://tools.ietf.org/html/rfc1761) which can
 later be viewed using for example [Wireshark](https://www.wireshark.org).
 
-Now, for live debugging:
+Now, for live debugging (note that we need to connect the network-control plug
+first to have the right permissions):
 
 ```
-$ sudo btmon
+$ sudo snap connect bluez:network-control
+$ sudo bluez.btmon
 ```
 
 For saving it later in a .snoop format:
 
 ```
-$ sudo btmon --write ~/hcitrace.snoop
+$ sudo bluez.btmon --write /tmp/hcitrace.snoop
 ```
 
-In case you are saving the .snoop file under the home directory make sure that
-the bluez snap has the home interface connected.
+You can also save the file in other snap-writable folders
+such as /var/snap/bluez/current.
 
-```
-$ sudo snap list interfaces
-```
-
-If not, then connect it
-
-```
-$ sudo snap connect bluez:home :home
-```
-
-Alternatively you should be able to save the file into a snap-writable folder
-such as either ~/snap/bluez/common or /var/snap/bluez/current.
-
-The nice thing about btmon and how it works is that it is possible to have
-several versions of it executed simultaneously. This allows capturing logs as
-in the last example in one shell and viewing it live in another.
+btmon allows several versions of it executed simultaneously. This allows
+capturing logs as in the last example in one shell and viewing it live in
+another.

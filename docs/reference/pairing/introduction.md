@@ -37,8 +37,8 @@ entering a pin code or answering a "would you like to connect yes/no" question.
 To pair with other devices BlueZ uses an agent-style DBus API. See the
 following links for more details on this:
 
- * [Agent API](https://git.kernel.org/cgit/bluetooth/bluez.git/tree/doc/agent-api.txt)
- * [Device API](https://git.kernel.org/cgit/bluetooth/bluez.git/tree/doc/device-api.txt)
+ * [Agent API](https://bluez.readthedocs.io/en/latest/agent-api/)
+ * [Device API](https://bluez.readthedocs.io/en/latest/device-api/)
 
 Within the bluetoothctl utility we can register such an agent with a
 specific IO capability with the BlueZ service and then process any

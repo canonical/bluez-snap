@@ -16,14 +16,14 @@ request. One of the reasons might be that the Bluetooth hardware is unpowered.
 Whenever you see something like:
 
 ```
-$ sudo bluez.bluetoothctl 
+$ sudo bluez.bluetoothctl
 [NEW] Controller 00:1A:7D:DA:71:08 core16 [default]
 [bluetooth]# scan on
 Failed to start discovery: org.bluez.Error.NotReady
 [bluetooth]#
 ``` 
 
-Power the chip on explicitly, type:
+try to power the chip on explicitly:
 
 ```
 [bluetooth]# power on
@@ -35,7 +35,7 @@ Changing power on succeeded
 
 ## Pairing Fails With a Device That Requires Confirmation
 
-The common mistake when using *bluetoothctl* to access BlueZ is to forget about
+A common mistake when using *bluetoothctl* to access BlueZ is to forget about
 registering an agent. The agent entity is responsible for handling the
 authentication requests that are a part of the pairing procedure.
 
