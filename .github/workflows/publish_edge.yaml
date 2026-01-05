@@ -5,7 +5,7 @@ on: push
 jobs:
   build:
     # self-hosted runner so we can access launchpad
-    runs-on: self-hosted
+    runs-on: [self-hosted, x64, linux, spread-enabled]
     environment: store
     steps:
       - name: Publish to edge
