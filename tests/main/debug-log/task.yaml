@@ -11,10 +11,12 @@ execute: |
   state=$(snap get bluez debug.enable)
   test "$state" = true
   snap restart bluez
+  wait_for_systemd_service snap.bluez.bluez
   pgrep --full "bluetoothd -E -d$"
 
   snap set bluez debug.enable=false
   state=$(snap get bluez debug.enable)
   test "$state" = false
   snap restart bluez
+  wait_for_systemd_service snap.bluez.bluez
   pgrep --full "bluetoothd -E$"
