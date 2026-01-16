@@ -1,3 +1,13 @@
+2026-01-16 bluez 5.53-12
+
+  [ alfonsosanchezbeato <alfonso.sanchez-beato@canonical.com> ]
+  * backport to snap-20: add serial-port plug to hciattach and btattach
+    Merge pull request #19 from stanley31huang/snap-20
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2025-03-14 bluez 5.53-11
 
   [ Changes in primed packages ]
