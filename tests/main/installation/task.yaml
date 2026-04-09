@@ -1,9 +1,11 @@
 summary: Test bluez snap installation was successful
 
 execute: |
+  . "$SYSTEMSNAPSTESTLIB"/utilities.sh
+
   # Service should be up an running
-  systemctl status snap.bluez.bluez | grep -Pzq ': active'
+  wait_for_systemd_service snap.bluez.bluez
 
   # Ensure all necessary plugs/slots are connected
-  snap interfaces | grep -Pzq "bluez:service +bluez:client"
-  snap interfaces | grep -Pzq ":uhid +bluez"
+  snap connections bluez | grep -Pzq "bluez:client.*bluez:service"
+  snap connections bluez | grep -Pzq "bluez:uhid.*:uhid"
