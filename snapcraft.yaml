@@ -1,5 +1,5 @@
 name: bluez
-version: 5.72-3-dev
+version: 5.85-4
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -7,10 +7,11 @@ description: |
  devices. BlueZ is the official Linux Bluetooth protocol stack. It
  is an Open Source project distributed under GNU General Public
  License (GPL). See the project homepage for more details:
- https://github.com/snapcore/bluez-snap/tree/snap-24
+ https://github.com/canonical/bluez-snap/tree/snap-26
 confinement: strict
-grade: stable
-base: core24
+grade: devel
+base: core26
+build-base: devel
 
 layout:
   /usr/var/lib/bluetooth:
@@ -112,7 +113,7 @@ parts:
     plugin: autotools
     source: https://git.launchpad.net/ubuntu/+source/bluez
     source-type: git
-    source-branch: applied/ubuntu/noble-updates
+    source-branch: applied/ubuntu/resolute-proposed
     autotools-configure-parameters:
       - --prefix=/usr
       - --libexec=/usr/lib/
@@ -123,6 +124,7 @@ parts:
       - --disable-silent-rules
       - --enable-test
       - --enable-deprecated
+      - --with-udevdir=/usr/lib/udev
       # Set explicitly flags until lp: #1791946 is solved
       - CFLAGS='-O2 -Wl,-z,relro,-z,now -pie -fpie'
     build-packages:
@@ -160,5 +162,5 @@ parts:
       # Strip binaries
       find "$CRAFT_PART_INSTALL"/ -executable -type f | xargs file -Ni |
           grep 'application/x-.*executable\|application/x-.*sharedlib' | cut -d: -f1 | xargs strip
-      # Run all tests shiped by default
+      # Run all tests shipped by default
       make check

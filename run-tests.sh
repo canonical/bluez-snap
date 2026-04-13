@@ -19,7 +19,7 @@ set -ex
 snap_name=bluez
 cicd_path=cicd
 if [ $# -eq 0 ]
-then set -- google:
+then set -- openstack-dev
 fi
 
 num_snaps=0
