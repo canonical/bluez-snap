@@ -1,17 +1,17 @@
-snapcraft-version: 8.2.10
-snapcraft-started-at: '2024-06-13T15:48:45.044456Z'
+snapcraft-version: 8.14.5.post106
+snapcraft-started-at: '2026-04-27T19:12:13.009312Z'
 snapcraft-os-release-id: ubuntu
-snapcraft-os-release-version-id: '24.04'
+snapcraft-os-release-version-id: '26.04'
 name: bluez
-version: 5.72-1
+version: 5.85-4
 summary: Bluetooth tools and daemons
 description: |
   This package contains tools and system daemons for using Bluetooth
   devices. BlueZ is the official Linux Bluetooth protocol stack. It
   is an Open Source project distributed under GNU General Public
   License (GPL). See the project homepage for more details:
-  https://github.com/snapcore/bluez-snap/tree/snap-24
-base: core24
+  https://github.com/canonical/bluez-snap/tree/snap-26
+base: core26
 grade: stable
 confinement: strict
 apps:
@@ -83,7 +83,7 @@ parts:
     build-packages: []
   changelog:
     plugin: nil
-    override-build: 'cp "/build/ci-bluez-snosdknar1i8se76"/ChangeLog "$CRAFT_PART_INSTALL"
+    override-build: 'cp "/build/bluez"/ChangeLog "$CRAFT_PART_INSTALL"
 
       '
     organize:
@@ -101,11 +101,11 @@ parts:
     - git
     - python3-docutils
     stage-packages:
-    - bluez-hcidump=5.72-0ubuntu5
-    - bluez=5.72-0ubuntu5
-    - libasound2-data=1.2.11-1build2
-    - libasound2t64=1.2.11-1build2
-    - libdw1t64=0.190-1.1build4
+    - bluez-hcidump=5.85-4
+    - bluez=5.85-4
+    - libasound2-data=1.2.15.3-1ubuntu1
+    - libasound2t64=1.2.15.3-1ubuntu1
+    - libdw1t64=0.194-4
     override-build: |
       set -ex
       find "$CRAFT_PART_INSTALL"/ -type f,l \
@@ -124,7 +124,7 @@ parts:
     plugin: autotools
     source: https://git.launchpad.net/ubuntu/+source/bluez
     source-type: git
-    source-branch: applied/ubuntu/noble
+    source-branch: applied/ubuntu/resolute
     autotools-configure-parameters:
     - --prefix=/usr
     - --libexec=/usr/lib/
@@ -135,6 +135,7 @@ parts:
     - --disable-silent-rules
     - --enable-test
     - --enable-deprecated
+    - --with-udevdir=/usr/lib/udev
     - CFLAGS='-O2 -Wl,-z,relro,-z,now -pie -fpie'
     build-packages:
     - flex
@@ -162,25 +163,25 @@ parts:
     - usr/bin/btmgmt
     override-build: |
       set -ex
-      "/build/ci-bluez-snosdknar1i8se76/stage"/build-tools/check-versions bluez yes
+      "/build/bluez/stage"/build-tools/check-versions bluez yes
       git config user.email "snapcraft@canonical.com"
       git config user.name "snapcraft"
-      git am "/build/ci-bluez-snosdknar1i8se76"/patch/*
+      git am "/build/bluez"/patch/*
       craftctl default
       cp tools/btmgmt "$CRAFT_PART_INSTALL"/usr/bin/
       # Strip binaries
       find "$CRAFT_PART_INSTALL"/ -executable -type f | xargs file -Ni |
           grep 'application/x-.*executable\|application/x-.*sharedlib' | cut -d: -f1 | xargs strip
-      # Run all tests shiped by default
+      # Run all tests shipped by default
       make check
     stage-packages: []
     stage: []
 architectures:
 - armhf
 image-info:
-  build_url: https://launchpad.net/~snappy-hwe-team/+snap/ci-bluez-snosdknar1i8se76/+build/2512163
+  build_url: https://launchpad.net/~snappy-hwe-team/+snap/bluez-snap-26/+build/3134495
 build-packages: []
 build-snaps: []
 primed-stage-packages:
-- bluez-hcidump=5.72-0ubuntu5
-- bluez=5.72-0ubuntu5
+- bluez-hcidump=5.85-4
+- bluez=5.85-4
