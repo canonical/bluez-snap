@@ -9,9 +9,8 @@ description: |
  License (GPL). See the project homepage for more details:
  https://github.com/canonical/bluez-snap/tree/snap-26
 confinement: strict
-grade: devel
+grade: stable
 base: core26
-build-base: devel
 
 layout:
   /usr/var/lib/bluetooth:
