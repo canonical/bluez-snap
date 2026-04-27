@@ -1,3 +1,199 @@
+2026-04-27 bluez 5.85-4
+
+  [ alfonsosanchezbeato <alfonso.sanchez-beato@canonical.com> ]
+  * docs: several updates to documentation
+    Merge pull request #21 from canonical/update-docs
+  * Initial upgrade of bluez-snap for core26
+    Merge pull request #23 from mpuricx/bluez26
+  * snapcraft.yaml: set grade to stable
+    Merge pull request #24 from mpuricx/set-to-stable
+
+  [ Philip Meulengracht <the_meulengracht@hotmail.com> ]
+  * snapcraft: switch to -updates pocket
+    Merge pull request #18 from Meulengracht/snap-24
+  * SECURITY.md: introduce our security policy
+    Merge pull request #22 from Meulengracht/26-security-md
+
+  [ Changes in primed packages ]
+  
+  bluez, bluez-hcidump (built from bluez) updated from 5.72-0ubuntu5 to 5.85-4:
+  
+    bluez (5.85-4) unstable; urgency=high
+  
+      [ Jeremy Bícha ]
+      * Demote bluez-obexd Depends: evolution-data-server to Suggests
+        (Closes: #1124744, Reopens: #1123793) (LP: #2145149)
+  
+      [ Luca Boccassi ]
+      * Install and use sysusers.d config file
+  
+     -- Jeremy Bícha <jbicha@ubuntu.com>  Mon, 23 Mar 2026 12:00:12 -0400
+  
+    bluez (5.85-3) unstable; urgency=medium
+  
+      * Team upload
+      * Move Depends: evolution-data-server from bluez to bluez-obexd
+  
+     -- Jeremy Bícha <jbicha@ubuntu.com>  Mon, 05 Jan 2026 21:20:43 -0500
+  
+    bluez (5.85-2) unstable; urgency=medium
+  
+      * Team upload
+      * Add Depends: evolution-data-server (Closes: #1123793)
+      * Don't enable SIM Access Profile feature (Closes: #803265)
+      * Revert "Don't build evolution-data-server backend feature on loong64"
+      * Add Multi-Arch: foreign to packages as recommended by the Multiarch hinter
+  
+     -- Jeremy Bícha <jbicha@ubuntu.com>  Mon, 05 Jan 2026 08:53:20 -0500
+  
+    bluez (5.85-1) unstable; urgency=medium
+  
+      * Team upload
+  
+      [ Nobuhiro Iwamatsu ]
+      * New upstream version 5.85.
+  
+      [ Jeremy Bícha ]
+      * Introduce a pkg.bluez.noeds build profile to avoid circular dependency
+        with evolution-data-server when bootstrapping
+      * Don't build evolution-data-server backend feature on loong64 for bootstrapping
+      * Don't build bluez-test-scripts with the nodoc or noinsttest build profiles
+      * Bump Standards Version to 4.7.3
+  
+     -- Jeremy Bícha <jbicha@ubuntu.com>  Sat, 03 Jan 2026 09:59:17 -0500
+  
+    bluez (5.84-1) unstable; urgency=medium
+  
+      * New upstream version 5.84.
+      * d/patches:
+        - Drop Fix-typo.patch.
+        - Drop shared-gatt-client-Fix-segfault-after-PIN-entry.patch.
+        - Drop headers-use-releative-symlinks.patch.
+        - Do-not-start-mpris-proxy-for-system-users.patch.
+      * d/bluez.manpages: Install org.bluez.Bearer.*.5
+      * d/libbluetooth-dev.manpages: intall man7/iso.7
+      * d/copyright: Fix superfluous-file-pattern warning
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Sat, 27 Sep 2025 10:43:55 +0900
+  
+    bluez (5.83-1) unstable; urgency=medium
+  
+      * Upload to unstable.
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Sat, 27 Sep 2025 09:11:49 +0900
+  
+    bluez (5.83-1~exp1) experimental; urgency=medium
+  
+      * New upstream version 5.83.
+      * d/patches: Update Fix-typo.patch
+      * debian/bluez.manpages: Install man7/mgmt.7
+      * d/control: Bumped Standards-Version to 4.7.2
+  
+      [Salvatore Bonaccorso]
+      * Do not start mpris-proxy for system users (Closes: #1094257)
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Wed, 25 Jun 2025 06:44:40 +0900
+  
+    bluez (5.82-1.1) unstable; urgency=medium
+  
+      * Non-maintainer upload.
+      * Do not start mpris-proxy for system users (Closes: #1094257)
+  
+     -- Salvatore Bonaccorso <carnil@debian.org>  Tue, 03 Jun 2025 20:48:11 +0200
+  
+    bluez (5.82-1) unstable; urgency=medium
+  
+      * Team upload
+  
+      [ Jochen Sprickerhof ]
+      * New upstream version 5.82 (LP: #2092158)
+      * Install new upstream config and manpage file
+      * Update d/copyright
+      * Update Debian patches
+      * Add Build-Depends-Package to symbols file
+  
+      [ Diederik de Haas ]
+      * Drop obsolete main.conf.patch & bluetooth.conf.patch
+  
+      [ Michael Biebl ]
+      * Fix removal of obsolete conffile /etc/dbus-1/system.d/bluetooth.conf
+        (Closes: #1043453)
+  
+     -- Jeremy Bícha <jbicha@ubuntu.com>  Fri, 11 Apr 2025 10:59:52 -0400
+  
+    bluez (5.79-2) unstable; urgency=medium
+  
+      * Team upload
+      * Have bluez depend on adduser since it's used by the postint script
+        (Closes: #1100139)
+  
+     -- Jeremy Bícha <jbicha@ubuntu.com>  Wed, 12 Mar 2025 09:31:04 -0400
+  
+    bluez (5.79-1) unstable; urgency=medium
+  
+      [ Jeremy Bícha ]
+      * Add apport hook
+      * Drop obsolete Pre-Depends
+      * debian/rules: minor cleanup
+      * Use ebook phonebook plugin
+      * autopkgtest: update syntax for Python 3.12
+      * Add patches from Ubuntu
+        - 0002-hostname-handle-chassis-type-handset.patch
+        - lp1759836.patch
+        - raspi-bcm43xx-load-firmware.patch
+        - raspi-bcm43xx-3wire.patch
+        - raspi-cypress-305-bdaddr.patch
+        - ubuntu_error_restart.patch
+  
+      [ Nobuhiro Iwamatsu ]
+      * New upstream version 5.79
+        (Closes: #1086526, #1031599, #1083183)
+      * d/patches: Drop raspi-cypress-305-bdaddr.patch.
+      * Install newly added files.
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Mon, 04 Nov 2024 07:19:59 +0900
+  
+    bluez (5.77-1) unstable; urgency=medium
+  
+      * Update to 5.77. (Closes: #1070269)
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Fri, 16 Aug 2024 15:46:59 +0900
+  
+    bluez (5.73-1.1) unstable; urgency=medium
+  
+      * tests: don't fail on output to stderr (Closes: #1071147)
+      * tests: mark the test as superficial as it doesn't test anything now
+  
+     -- Paul Gevers <elbrus@debian.org>  Sun, 28 Jul 2024 17:14:24 +0200
+  
+    bluez (5.73-1) unstable; urgency=medium
+  
+      * Update to 5.73. (Closes: #1060795, #1060242)
+      * d/patches:
+        - Drop allow-using-obexd-without-systemd-in-the-user-sessio.patch.
+        - Drop change_path_of_hogsuspend.patch.
+        - Update org.bluez.obex.service.in.patch.
+        - Drop Change-shebang-from-usr-bin-python-to-usr-bin-python.patch
+        - Update work-around-Logitech-diNovo-Edge-keyboard-firmware-i.patch.
+          (Closes: #1060393)
+      * d//libbluetooth*.install:
+        - Drop sixaxis.[a|so] from libbluetooth*.install.
+      * d/bluez-meshd.install: Install mesh-main.conf.
+      * d/bluez.install: Change install path of config files.
+      * d/bluez.manpages: Change install path of manpages.
+      * d/bluez-obexd.install: Install dbus-org.bluez.obex.service.
+      * d/control:
+        - Change from pkg-config to pkgconf with libbluetooth-dev.
+        - Add systemd-dev only with Build-Depends. (Closes: #1060516)
+        - Bumped Standards-Version to 4.7.0.
+      * d/tests:
+        - Add simple testsuite from Ubuntu. (Closes: #1060395)
+      * d/libbluetooth3.symbols: Update
+      * d/copyright:
+        - Drop unprovided source files.
+  
+     -- Nobuhiro Iwamatsu <iwamatsu@debian.org>  Wed, 10 Apr 2024 20:25:04 +0900
+  
 2024-06-13 bluez 5.72-1
 
   [ Philip Meulengracht <the_meulengracht@hotmail.com> ]
