@@ -14,5 +14,6 @@ jobs:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
         uses: snapcore/system-snaps-cicd-tools/action-publish-edge@main
         with:
+          spread_suites: "openstack-dev:"
           # TODO: remove this filter when snapd 2.64 is released
           architectures: arm64,amd64,armhf

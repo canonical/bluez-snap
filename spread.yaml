@@ -105,15 +105,10 @@ prepare: |
   "$SYSTEMSNAPSTESTLIB"/prepare.sh
 
 prepare-each: |
-  # Wait for seeding before any snap operations
-  snap wait system seed.loaded
-  # OBS: This is temporary to bootstrap. Remove once the snap is published to stable
-  # and leave only the prepare-each.sh command
-  snap install --dangerous "$PROJECT_PATH"/"$SNAP_NAME"*_amd64.snap
+  # TODO: switch to 26/stable once the snap is promoted there
+  "$SYSTEMSNAPSTESTLIB"/prepare-each.sh "$SNAP_NAME" 26/beta
   snap connect bluez:client bluez:service
   snap connect bluez:uhid
-  # Run prepare-each step which is a bit of a no-op now
-  "$SYSTEMSNAPSTESTLIB"/prepare-each.sh "$SNAP_NAME" 26/stable
 
 restore-each: |
   snap wait system seed.loaded
