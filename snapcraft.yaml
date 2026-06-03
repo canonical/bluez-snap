@@ -27,8 +27,9 @@ apps:
     plugs: [client]
   bluez:
     command: bin/bluetoothd-wrapper
-    daemon: simple
-    slots: [service]
+    daemon: dbus
+    bus-name: org.bluez
+    slots: [service, dbus-bluez]
     plugs: [uhid, uinput, kernel-crypto-api]
   obex:
     command: "usr/lib/bluetooth/obexd"
@@ -69,6 +70,10 @@ plugs:
 slots:
   service:
       interface: bluez
+  dbus-bluez:
+      interface: dbus
+      bus: system
+      name: org.bluez
 
 parts:
 
