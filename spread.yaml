@@ -88,7 +88,7 @@ backends:
   qemu:
     memory: 4G
     systems:
-      - ubuntu-core-20:
+      - ubuntu-core-22:
           # TODO how is this done in snapd spread?
           #bios: /usr/share/OVMF/OVMF_CODE.fd
           username: test
