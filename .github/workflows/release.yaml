@@ -17,3 +17,5 @@ jobs:
           LP_CREDENTIALS: ${{ secrets.LP_CREDENTIALS }}
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
         uses: snapcore/system-snaps-cicd-tools/action-release@main
+        with:
+          snapcraft_channel: 8.x/stable
