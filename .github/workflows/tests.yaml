@@ -16,4 +16,6 @@ jobs:
         uses: snapcore/system-snaps-cicd-tools/action-test@main
         with:
           spread_suites: "openstack:"
+          snapcraft_channel: 8.x/stable
+
 
