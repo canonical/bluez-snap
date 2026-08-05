@@ -1,3 +1,25 @@
+2026-08-05 bluez 5.53-13
+
+  [ Meulengracht <the_meulengracht@hotmail.com> ]
+  * spread: migrate to openstack
+    Merge pull request #29 from Meulengracht/bugfix/openstack-migration
+  * github: allow write perms for release
+    Merge pull request #30 from Meulengracht/snap-20
+  * github: add write permissions for release workflow
+    Merge pull request #31 from Meulengracht/snap-20
+  * github: use 8.x channel
+    Merge pull request #32 from Meulengracht/snap-20
+
+  [ Philip Meulengracht <the_meulengracht@hotmail.com> ]
+  * snapcraft: change service to dbus type and add dbus slot.
+
+    snapcraft: change service to dbus type and add dbus slot.
+    
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2026-01-16 bluez 5.53-12
 
   [ alfonsosanchezbeato <alfonso.sanchez-beato@canonical.com> ]
