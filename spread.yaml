@@ -97,14 +97,14 @@ exclude:
 
 prepare: |
   # When running this through other means than GH actions, ensure that
-  # the repo is checked out. And that we are not running from GH actions.
+  # the repo is checked out.
   if [ -z "$GITHUB_RUN_ID" ] && ! [ -d /home/bluez/cicd ]; then
     git clone https://github.com/snapcore/system-snaps-cicd-tools.git /home/bluez/cicd
   fi
   # Take the MATCH and REBOOT functions from spread and allow our shell
   # scripts to use them as shell commands. The replacements are real
-  # executables in cicd/snapd-lib/bin (which is on PATH) but they source
-  # spread-funcs.sh written here, base on the definitions provided by SPREAD.
+  # executables in cicd/snapd-lib/tools (which is on PATH) but they source
+  # spread-funcs.sh written here, based on the definitions provided by SPREAD.
   # This ensures that 1) spread functions define the code 2) both MATCH and
   # REBOOT are executables and not functions, and can be called from any
   # context.
