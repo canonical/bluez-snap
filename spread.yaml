@@ -98,7 +98,7 @@ exclude:
 prepare: |
   # When running this through other means than GH actions, ensure that
   # the repo is checked out.
-  if [ -z "$GITHUB_RUN_ID" ] && ! [ -d /home/bluez/cicd ]; then
+  if [ -z "$GITHUB_RUN_ID" ]; then
     git clone https://github.com/snapcore/system-snaps-cicd-tools.git /home/bluez/cicd
   fi
   # Take the MATCH and REBOOT functions from spread and allow our shell
