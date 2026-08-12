@@ -16,15 +16,73 @@
 project: bluez
 
 environment:
-    PROJECT_PATH: /home/bluez
-    TESTSLIB: $PROJECT_PATH/tests/lib
-    SNAP_NAME: bluez
-    SNAP_ARCH: amd64
-    # Allow the host to pass the channel to use for the test run
-    SNAP_CHANNEL: $(HOST:echo $SNAP_CHANNEL)
-    SNAP_AUTO_ALIASES: bluetoothctl obexctl hciconfig hcidump hciattach hcitool
+  SNAP_NAME: bluez
+  SNAP_ARCH: amd64
+  SNAP_AUTO_ALIASES: bluetoothctl obexctl hciconfig hcidump hciattach hcitool
+  PROJECT_PATH: /home/bluez
+  # Allow the host to pass the channel to use for the test run
+  SNAP_CHANNEL: '$(HOST: echo "${SNAP_CHANNEL:-}")'
+  GITHUB_RUN_ID: '$(HOST: echo "${GITHUB_RUN_ID:-}")'
+  LOCAL_BIN: /usr/local/bin
+  TESTSLIB: $PROJECT_PATH/cicd/snapd-lib
+  SYSTEMSNAPSTESTLIB: $PROJECT_PATH/cicd/lib
+  TESTSTOOLS: $PROJECT_PATH/cicd/snapd-lib/tools
+  SNAPD_WORK_DIR: '$(HOST: echo "${SPREAD_SNAPD_WORK_DIR:-/var/tmp/work-dir}")'
+  PATH: /snap/bin:$PATH:/var/lib/snapd/snap/bin:$PROJECT_PATH/cicd/snapd-lib/tools
+  TESTSTMP: /var/tmp/snapd-tools
+  REUSE_SNAPD: 0
+  SRU_VALIDATION: 0
+  # List the snaps which are cached
+  PRE_CACHE_SNAPS: jq
+  CORE_CHANNEL: '$(HOST: echo "${SPREAD_CORE_CHANNEL:-edge}")'
+  BASE_CHANNEL: '$(HOST: echo "${SPREAD_BASE_CHANNEL:-edge}")'
+  KERNEL_CHANNEL: '$(HOST: echo "${SPREAD_KERNEL_CHANNEL:-edge}")'
+  GADGET_CHANNEL: '$(HOST: echo "${SPREAD_GADGET_CHANNEL:-edge}")'
+  SNAPD_CHANNEL: '$(HOST: echo "${SPREAD_SNAPD_CHANNEL:-edge}")'
+  DEFAULT_NETPLAN_FILE: 50-cloud-init.yaml
 
 backends:
+  openstack:
+    type: openstack
+    key: '$(HOST: echo "$OS_CREDENTIALS_AMD64_PS7")'
+    plan: shared.xsmall
+    halt-timeout: 2h
+    wait-timeout: 10m
+    groups: [default]
+    proxy: ingress-haproxy.ps7.canonical.com
+    cidr-port-rel: [10.151.96.0/21:5000]
+    volume-auto-delete: true
+    environment: &openstack-env
+      SNAPD_USE_PROXY: 'true'
+      HTTP_PROXY: 'http://egress.ps7.internal:3128'
+      HTTPS_PROXY: 'http://egress.ps7.internal:3128'
+      http_proxy: 'http://egress.ps7.internal:3128'
+      https_proxy: 'http://egress.ps7.internal:3128'
+      no_proxy: '127.0.0.1,127.0.0.53,localhost'
+      NO_PROXY: '127.0.0.1,127.0.0.53,localhost'
+      NTP_SERVER: 'ntp.ps7.internal'
+    systems: &openstack-systems
+      - ubuntu-core-16-64:
+          image: snapd-spread/ubuntu-16.04-64
+          workers: 1
+    prepare: |
+      "$TESTSLIB"/prepare-restore.sh --prepare-suite
+
+  openstack-dev:
+    type: openstack
+    key: '$(HOST: echo "$OS_CREDENTIALS_STG_AMD64_PS7")'
+    plan: shared.xsmall
+    halt-timeout: 2h
+    wait-timeout: 10m
+    groups: [default]
+    proxy: ingress-haproxy.ps7.canonical.com
+    cidr-port-rel: [10.151.54.0/24:4000]
+    volume-auto-delete: true
+    environment: *openstack-env
+    systems: *openstack-systems
+    prepare: |
+      "$TESTSLIB"/prepare-restore.sh --prepare-suite
+
     qemu:
         systems:
             - ubuntu-core-16:
@@ -38,14 +96,42 @@ exclude:
   - .git
 
 prepare: |
-  . $TESTSLIB/prepare-all.sh
+  # When running this through other means than GH actions, ensure that
+  # the repo is checked out.
+  if [ -z "$GITHUB_RUN_ID" ]; then
+    git clone https://github.com/snapcore/system-snaps-cicd-tools.git /home/bluez/cicd
+  fi
+  # Take the MATCH and REBOOT functions from spread and allow our shell
+  # scripts to use them as shell commands. The replacements are real
+  # executables in cicd/snapd-lib/tools (which is on PATH) but they source
+  # spread-funcs.sh written here, based on the definitions provided by SPREAD.
+  # This ensures that 1) spread functions define the code 2) both MATCH and
+  # REBOOT are executables and not functions, and can be called from any
+  # context.
+  # This is not done in prepare.sh as these variables are not exported,
+  # and we do not want to source prepare.sh or export these.
+  type MATCH | tail -n +2 > "$TESTSLIB"/spread-funcs.sh
+  unset MATCH
+  type NOMATCH | tail -n +2 >> "$TESTSLIB"/spread-funcs.sh
+  unset NOMATCH
+  type REBOOT | tail -n +2 >> "$TESTSLIB"/spread-funcs.sh
+  unset REBOOT
+  "$SYSTEMSNAPSTESTLIB"/prepare.sh
+
+prepare-each: |
+  "$SYSTEMSNAPSTESTLIB"/prepare-each.sh "$SNAP_NAME" latest/stable
+
+restore-each: |
+  "$SYSTEMSNAPSTESTLIB"/restore-each.sh
+
+debug-each: |
+  journalctl
+  dmesg | grep DENIED || true
+
+# (default is 15 min)
+kill-timeout: 30m
 
 suites:
-    tests/main/:
-        summary: Full-system tests for BlueZ
-        systems:
-            - ubuntu-core-16
-        prepare: |
-            . $TESTSLIB/prepare.sh
-        restore-each: |
-            . $TESTSLIB/restore-each.sh
+  tests/main/:
+    summary: Full-system tests for BlueZ
+    systems: [ubuntu-core-*]
