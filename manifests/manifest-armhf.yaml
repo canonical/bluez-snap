@@ -1,9 +1,9 @@
 snapcraft-version: 8.14.5
-snapcraft-started-at: '2026-08-05T06:16:20.614914Z'
+snapcraft-started-at: '2026-08-25T09:58:12.380442Z'
 snapcraft-os-release-id: ubuntu
 snapcraft-os-release-version-id: '20.04'
 name: bluez
-version: 5.53-13
+version: 5.53-14
 type: app
 summary: Bluetooth tools and daemons
 description: |
@@ -231,7 +231,7 @@ parts:
     - libcryptsetup12=2:2.2.2-3ubuntu2.5
     - libctf-nobfd0=2.34-6ubuntu1.11+esm2
     - libctf0=2.34-6ubuntu1.11+esm2
-    - libcurl3-gnutls=7.68.0-1ubuntu2.25+esm5
+    - libcurl3-gnutls=7.68.0-1ubuntu2.25+esm6
     - libdb-dev=1:5.3.21~exp1ubuntu2
     - libdb5.3-dev=5.3.28+dfsg1-0.6ubuntu2
     - libdb5.3=5.3.28+dfsg1-0.6ubuntu2
@@ -328,7 +328,7 @@ parts:
     - libpcre3=2:8.39-12ubuntu0.1
     - libpcrecpp0v5=2:8.39-12ubuntu0.1
     - libperl5.30=5.30.0-9ubuntu0.5+esm2
-    - libpng16-16=1.6.37-2ubuntu0.1~esm2
+    - libpng16-16=1.6.37-2ubuntu0.1~esm3
     - libprocps8=2:3.3.16-1ubuntu2.4
     - libpsl5=0.21.0-1ubuntu1
     - libpython3-stdlib=3.8.2-0ubuntu2
@@ -370,7 +370,7 @@ parts:
     - libwind0-heimdal=7.7.0+dfsg-1ubuntu1.4
     - libwrap0=7.6.q-30
     - libzstd1=1.4.4+dfsg-3ubuntu0.1
-    - linux-libc-dev=5.4.0-233.253
+    - linux-libc-dev=5.4.0-234.254
     - lockfile-progs=0.1.18
     - login=1:4.8.1-1ubuntu5.20.04.5
     - logsave=1.45.5-2ubuntu1.2
@@ -426,7 +426,7 @@ parts:
     - core20=2867
     - core24=1645
     - snapcraft=17617
-    - snapd=27594
+    - snapd=27711
     override-build: |
       set -ex
       "/build/bluez-snap-20/stage"/build-tools/check-versions bluez yes
@@ -464,7 +464,7 @@ parts:
     source-type: git
     stage: []
     stage-packages: []
-    uname: 'Linux 6.8.0-136-generic #136-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 21:33:11
+    uname: 'Linux 6.8.0-138-generic #138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:20:42
       UTC 2026 armv7l armv7l armv7l GNU/Linux'
   bluez-common:
     build-packages: []
@@ -559,7 +559,7 @@ parts:
     - libcryptsetup12=2:2.2.2-3ubuntu2.5
     - libctf-nobfd0=2.34-6ubuntu1.11+esm2
     - libctf0=2.34-6ubuntu1.11+esm2
-    - libcurl3-gnutls=7.68.0-1ubuntu2.25+esm5
+    - libcurl3-gnutls=7.68.0-1ubuntu2.25+esm6
     - libdb-dev=1:5.3.21~exp1ubuntu2
     - libdb5.3-dev=5.3.28+dfsg1-0.6ubuntu2
     - libdb5.3=5.3.28+dfsg1-0.6ubuntu2
@@ -656,7 +656,7 @@ parts:
     - libpcre3=2:8.39-12ubuntu0.1
     - libpcrecpp0v5=2:8.39-12ubuntu0.1
     - libperl5.30=5.30.0-9ubuntu0.5+esm2
-    - libpng16-16=1.6.37-2ubuntu0.1~esm2
+    - libpng16-16=1.6.37-2ubuntu0.1~esm3
     - libprocps8=2:3.3.16-1ubuntu2.4
     - libpsl5=0.21.0-1ubuntu1
     - libpython3-stdlib=3.8.2-0ubuntu2
@@ -698,7 +698,7 @@ parts:
     - libwind0-heimdal=7.7.0+dfsg-1ubuntu1.4
     - libwrap0=7.6.q-30
     - libzstd1=1.4.4+dfsg-3ubuntu0.1
-    - linux-libc-dev=5.4.0-233.253
+    - linux-libc-dev=5.4.0-234.254
     - lockfile-progs=0.1.18
     - login=1:4.8.1-1ubuntu5.20.04.5
     - logsave=1.45.5-2ubuntu1.2
@@ -754,7 +754,7 @@ parts:
     - core20=2867
     - core24=1645
     - snapcraft=17617
-    - snapd=27594
+    - snapd=27711
     organize:
       bluetoothd-wrapper: bin/bluetoothd-wrapper
       client-wrapper: bin/client-wrapper
@@ -763,7 +763,7 @@ parts:
     source: bin/
     stage: []
     stage-packages: []
-    uname: 'Linux 6.8.0-136-generic #136-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 21:33:11
+    uname: 'Linux 6.8.0-138-generic #138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:20:42
       UTC 2026 armv7l armv7l armv7l GNU/Linux'
   changelog:
     build-packages: []
@@ -858,7 +858,7 @@ parts:
     - libcryptsetup12=2:2.2.2-3ubuntu2.5
     - libctf-nobfd0=2.34-6ubuntu1.11+esm2
     - libctf0=2.34-6ubuntu1.11+esm2
-    - libcurl3-gnutls=7.68.0-1ubuntu2.25+esm5
+    - libcurl3-gnutls=7.68.0-1ubuntu2.25+esm6
     - libdb-dev=1:5.3.21~exp1ubuntu2
     - libdb5.3-dev=5.3.28+dfsg1-0.6ubuntu2
     - libdb5.3=5.3.28+dfsg1-0.6ubuntu2
@@ -955,7 +955,7 @@ parts:
     - libpcre3=2:8.39-12ubuntu0.1
     - libpcrecpp0v5=2:8.39-12ubuntu0.1
     - libperl5.30=5.30.0-9ubuntu0.5+esm2
-    - libpng16-16=1.6.37-2ubuntu0.1~esm2
+    - libpng16-16=1.6.37-2ubuntu0.1~esm3
     - libprocps8=2:3.3.16-1ubuntu2.4
     - libpsl5=0.21.0-1ubuntu1
     - libpython3-stdlib=3.8.2-0ubuntu2
@@ -997,7 +997,7 @@ parts:
     - libwind0-heimdal=7.7.0+dfsg-1ubuntu1.4
     - libwrap0=7.6.q-30
     - libzstd1=1.4.4+dfsg-3ubuntu0.1
-    - linux-libc-dev=5.4.0-233.253
+    - linux-libc-dev=5.4.0-234.254
     - lockfile-progs=0.1.18
     - login=1:4.8.1-1ubuntu5.20.04.5
     - logsave=1.45.5-2ubuntu1.2
@@ -1053,7 +1053,7 @@ parts:
     - core20=2867
     - core24=1645
     - snapcraft=17617
-    - snapd=27594
+    - snapd=27711
     organize:
       ChangeLog: snap/ChangeLog
     override-build: 'cp "/build/bluez-snap-20"/ChangeLog "$SNAPCRAFT_PART_INSTALL"
@@ -1063,7 +1063,7 @@ parts:
     prime: []
     stage: []
     stage-packages: []
-    uname: 'Linux 6.8.0-136-generic #136-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 21:33:11
+    uname: 'Linux 6.8.0-138-generic #138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:20:42
       UTC 2026 armv7l armv7l armv7l GNU/Linux'
   stack-snaps-tools:
     build-packages:
@@ -1074,7 +1074,7 @@ parts:
     - core20=2867
     - core24=1645
     - snapcraft=17617
-    - snapd=27594
+    - snapd=27711
     override-build: |
       set -ex
       find "$SNAPCRAFT_PART_INSTALL"/ -type f,l \
@@ -1101,12 +1101,12 @@ parts:
     - bluez=5.53-0ubuntu3.9
     - libical3=3.0.8-1
     - libicu66=66.1-2ubuntu2.1
-    uname: 'Linux 6.8.0-136-generic #136-Ubuntu SMP PREEMPT_DYNAMIC Wed Jul  1 21:33:11
+    uname: 'Linux 6.8.0-138-generic #138-Ubuntu SMP PREEMPT_DYNAMIC Fri Jul 31 22:20:42
       UTC 2026 armv7l armv7l armv7l GNU/Linux'
 architectures:
 - armhf
 image-info:
-  build_url: https://launchpad.net/~snappy-hwe-team/+snap/bluez-snap-20/+build/3236746
+  build_url: https://launchpad.net/~snappy-hwe-team/+snap/bluez-snap-20/+build/3258129
 build-packages:
 - autoconf=2.69-11.1
 - automake=1:1.16.1-4ubuntu6
