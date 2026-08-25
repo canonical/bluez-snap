@@ -21,8 +21,9 @@ apps:
     plugs: [client]
   bluez:
     command: "usr/lib/bluetooth/bluetoothd -E"
-    daemon: simple
-    slots: [service]
+    daemon: dbus
+    bus-name: org.bluez
+    slots: [service, dbus-bluez]
     plugs: [uhid]
   obex:
     command: "usr/lib/bluetooth/obexd"
@@ -62,6 +63,10 @@ plugs:
 slots:
   service:
       interface: bluez
+  dbus-bluez:
+      interface: dbus
+      bus: system
+      name: org.bluez
 
 parts:
   bluez-common:
