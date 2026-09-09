@@ -1,0 +1,43 @@
+name: Build snaps
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build ${{ matrix.architecture }}
+    runs-on: focal
+    strategy:
+      fail-fast: false
+      matrix:
+        architecture:
+          - amd64
+          - arm64
+          - armhf
+          - i386
+          - ppc64el
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v4
+
+      - name: Build snap
+        id: snapcraft
+        uses: diddlesnaps/snapcraft-multiarch-action@v1
+        with:
+          architecture: ${{ matrix.architecture }}
+          snapcraft-channel: 4.x/stable
+
+      - name: Upload snap
+        uses: actions/upload-artifact@v7
+        with:
+          name: bluez-${{ matrix.architecture }}
+          path: ${{ steps.snapcraft.outputs.snap }}
+          if-no-files-found: error
