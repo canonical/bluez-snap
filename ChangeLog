@@ -1,3 +1,15 @@
+2026-11-10 bluez 5.48-6
+
+  [ Meulengracht <the_meulengracht@hotmail.com> ]
+  * See more information in merge proposal
+    Merge pull request #33 from Meulengracht/feature/snap16-openstack
+  * snapcraft: change to dbus service and expose dbus slot
+    Merge pull request #35 from canonical/latest_dbus-slot
+
+  [ Changes in primed packages ]
+  
+  No changes for primed packages
+  
 2025-03-19 bluez 5.48-5
 
   [ Alfonso Sanchez-Beato <alfonso.sanchez-beato@canonical.com> ]
